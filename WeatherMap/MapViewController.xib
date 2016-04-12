@@ -7,6 +7,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MapViewController" customModule="WeatherMap" customModuleProvider="target">
             <connections>
+                <outlet property="citylabel" destination="Qdq-W9-tXU" id="jXN-La-Jed"/>
+                <outlet property="coordinateLabel" destination="dGq-H5-W3g" id="9Xh-xD-9L8"/>
+                <outlet property="descriptionView" destination="mfy-dF-9dK" id="i4T-4t-qQM"/>
                 <outlet property="map" destination="vOa-Va-BQG" id="L05-g3-adO"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -19,11 +22,40 @@
                 <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="vOa-Va-BQG">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                 </mapView>
-                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mfy-dF-9dK">
-                    <rect key="frame" x="0.0" y="540" width="600" height="60"/>
+                <view hidden="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mfy-dF-9dK">
+                    <rect key="frame" x="0.0" y="30" width="600" height="70"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EsG-Ad-NSR">
+                            <rect key="frame" x="540" y="0.0" width="60" height="70"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="60" id="fBm-U2-ASc"/>
+                            </constraints>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qdq-W9-tXU">
+                            <rect key="frame" x="8" y="8" width="524" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dGq-H5-W3g">
+                            <rect key="frame" x="8" y="37" width="524" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="60" id="tlf-Ww-Kp7"/>
+                        <constraint firstItem="EsG-Ad-NSR" firstAttribute="top" secondItem="mfy-dF-9dK" secondAttribute="top" id="3DP-hI-NoP"/>
+                        <constraint firstAttribute="bottom" secondItem="EsG-Ad-NSR" secondAttribute="bottom" id="BNW-4K-tey"/>
+                        <constraint firstAttribute="trailing" secondItem="EsG-Ad-NSR" secondAttribute="trailing" id="EaC-oC-r36"/>
+                        <constraint firstItem="Qdq-W9-tXU" firstAttribute="top" secondItem="mfy-dF-9dK" secondAttribute="top" constant="8" id="OFd-3d-cXl"/>
+                        <constraint firstItem="dGq-H5-W3g" firstAttribute="leading" secondItem="mfy-dF-9dK" secondAttribute="leading" constant="8" id="W1G-nm-it7"/>
+                        <constraint firstItem="EsG-Ad-NSR" firstAttribute="leading" secondItem="dGq-H5-W3g" secondAttribute="trailing" constant="8" id="Z3u-AJ-POt"/>
+                        <constraint firstItem="Qdq-W9-tXU" firstAttribute="leading" secondItem="mfy-dF-9dK" secondAttribute="leading" constant="8" id="cSK-OM-Zwn"/>
+                        <constraint firstItem="EsG-Ad-NSR" firstAttribute="leading" secondItem="Qdq-W9-tXU" secondAttribute="trailing" constant="8" id="h1Q-BS-fqu"/>
+                        <constraint firstItem="dGq-H5-W3g" firstAttribute="top" secondItem="Qdq-W9-tXU" secondAttribute="bottom" constant="8" id="q2A-oe-YDw"/>
+                        <constraint firstAttribute="height" constant="70" id="tlf-Ww-Kp7"/>
                     </constraints>
                 </view>
             </subviews>
