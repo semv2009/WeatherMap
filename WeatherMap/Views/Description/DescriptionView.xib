@@ -9,6 +9,7 @@
             <connections>
                 <outlet property="cityLabel" destination="d0Z-ma-X8i" id="HCG-kt-GEz"/>
                 <outlet property="coordinateLabel" destination="MwS-LB-GSZ" id="HEM-Br-4mQ"/>
+                <outlet property="weatherButton" destination="T6R-lT-GEk" id="hlM-VO-4Yr"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -29,24 +30,24 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T6R-lT-GEk">
-                    <rect key="frame" x="530" y="8" width="58" height="54"/>
+                    <rect key="frame" x="530" y="8" width="58" height="50"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="58" id="10b-rO-vat"/>
+                        <constraint firstAttribute="width" constant="58" id="ir5-Bt-7CK"/>
                     </constraints>
                     <state key="normal" title="Weather"/>
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="T6R-lT-GEk" secondAttribute="trailing" constant="12" id="1UR-VD-cAr"/>
+                <constraint firstItem="T6R-lT-GEk" firstAttribute="bottom" secondItem="MwS-LB-GSZ" secondAttribute="bottom" id="8L0-8f-xUH"/>
                 <constraint firstItem="MwS-LB-GSZ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="KaL-xA-nmU"/>
-                <constraint firstItem="T6R-lT-GEk" firstAttribute="leading" secondItem="MwS-LB-GSZ" secondAttribute="trailing" constant="8" id="SKN-eA-vtS"/>
+                <constraint firstItem="T6R-lT-GEk" firstAttribute="top" secondItem="d0Z-ma-X8i" secondAttribute="top" id="LbB-L2-h5V"/>
                 <constraint firstAttribute="bottom" secondItem="MwS-LB-GSZ" secondAttribute="bottom" constant="12" id="SMA-x6-erM"/>
-                <constraint firstItem="T6R-lT-GEk" firstAttribute="leading" secondItem="d0Z-ma-X8i" secondAttribute="trailing" constant="8" id="WF4-Xz-xkx"/>
-                <constraint firstItem="T6R-lT-GEk" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="da4-G2-0DP"/>
+                <constraint firstItem="T6R-lT-GEk" firstAttribute="leading" secondItem="d0Z-ma-X8i" secondAttribute="trailing" constant="8" symbolic="YES" id="jvA-iL-fys"/>
                 <constraint firstItem="MwS-LB-GSZ" firstAttribute="top" secondItem="d0Z-ma-X8i" secondAttribute="bottom" constant="8" symbolic="YES" id="qfF-bY-RFy"/>
-                <constraint firstAttribute="bottom" secondItem="T6R-lT-GEk" secondAttribute="bottom" constant="8" id="r2B-eR-2rb"/>
+                <constraint firstItem="T6R-lT-GEk" firstAttribute="leading" secondItem="MwS-LB-GSZ" secondAttribute="trailing" constant="8" symbolic="YES" id="uH7-1V-adZ"/>
                 <constraint firstItem="d0Z-ma-X8i" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="x81-vz-PRp"/>
+                <constraint firstAttribute="trailing" secondItem="T6R-lT-GEk" secondAttribute="trailing" constant="12" id="xZK-k1-PuE"/>
                 <constraint firstItem="d0Z-ma-X8i" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="xv6-e7-uRr"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>

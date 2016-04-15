@@ -8,7 +8,7 @@
 
 import UIKit
 import MapKit
-
+import Alamofire
 
 
 class MapViewController: UIViewController {
@@ -17,9 +17,10 @@ class MapViewController: UIViewController {
 
     @IBOutlet weak var descriptionView: DescriptionView!
     
-    @IBOutlet weak var mapViewButtomToVIew: NSLayoutConstraint!
+    @IBOutlet weak var mapBottomSpace: NSLayoutConstraint!
     
     let initialLocation = CLLocation(latitude: 21.282778, longitude: -157.829444)
+    
     private let hightOfDescriptionView: CGFloat = 70
     
     var annotaton: MKPointAnnotation?
@@ -27,12 +28,28 @@ class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         map.delegate = self
+        descriptionView.weatherButton.addTarget(self, action: #selector(MapViewController.showWeather), forControlEvents: .TouchDown)
         descriptionView.translatesAutoresizingMaskIntoConstraints = false
-        mapViewButtomToVIew.constant = 0
         centerMapOnLocation(initialLocation)
         
         let tapGR = UITapGestureRecognizer(target: self, action: #selector(MapViewController.annotation(_:)))
         map.addGestureRecognizer(tapGR)
+    }
+    
+    func showWeather(){
+        print("ShowWeather")
+        guard let city = descriptionView.cityLabel.text else { fatalError("City did't find") }
+        Alamofire.request(.GET, OpenWeatherMap.URL, parameters: ["q": city,"appid": OpenWeatherMap.API])
+            .responseJSON { response in
+                print(response.request)  // original URL request
+                print(response.response) // URL response
+                print(response.data)     // server data
+                print(response.result)   // result of response serialization
+                
+                if let JSON = response.result.value {
+                    print("JSON: \(JSON)")
+                }
+        }
     }
     
     func annotation(gesture: UIGestureRecognizer){
@@ -55,24 +72,25 @@ class MapViewController: UIViewController {
     
     let regionRadius: CLLocationDistance = 1000
     func centerMapOnLocation(location: CLLocation) {
-        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate,
-                                                                regionRadius * 2.0, regionRadius * 2.0)
+        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, regionRadius * 2.0, regionRadius * 2.0)
         map.setRegion(coordinateRegion, animated: true)
     }
     
-    func showDescriptionView() {
-        print("Transform")
+    func showDescriptionView(city city: String, coordinate: CLLocationCoordinate2D) {
+        self.descriptionView.cityLabel.text = city
+        let latStr = NSString(format: "%.5f", coordinate.latitude)
+        let lonStr = NSString(format: "%.5f", coordinate.longitude)
+        self.descriptionView.coordinateLabel.text = "lat = \(latStr)    lon = \(lonStr)"
         
         UIView.animateWithDuration(0.7, delay: 0.0, options: .CurveEaseOut, animations: {
-            self.mapViewButtomToVIew.constant = self.hightOfDescriptionView
+            self.mapBottomSpace.constant = self.hightOfDescriptionView
             self.view.layoutIfNeeded()
             }, completion: nil)
-        
     }
     
     func hideDescriptionView() {
         UIView.animateWithDuration(0.7, delay: 0.0, options: .CurveEaseOut, animations: {
-            self.mapViewButtomToVIew.constant = 0
+            self.mapBottomSpace.constant = 0
             self.view.layoutIfNeeded()
             }, completion: nil)
     }
@@ -87,16 +105,7 @@ class MapViewController: UIViewController {
                 if placemarks.count > 0 {
                     let pm = placemarks[0] as CLPlacemark
                     if let locality = pm.locality {
-                        
-                        self.descriptionView.cityLabel.text = locality
-                        let latStr = NSString(format: "%.5f", coordinate.latitude)
-                        let lonStr = NSString(format: "%.5f", coordinate.longitude)
-                        self.descriptionView.coordinateLabel.text = "lat = \(latStr)    lon = \(lonStr)"
-                        self.showDescriptionView()
-                        
-//                        print("City = \(locality)")
-//                        self.descriptionView.hidden = false
-//                        self.citylabel.text = locality
+                        self.showDescriptionView(city: locality, coordinate: coordinate)
                     }else{
                         self.hideDescriptionView()
                     }

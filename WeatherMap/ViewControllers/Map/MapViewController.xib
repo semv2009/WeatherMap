@@ -9,7 +9,7 @@
             <connections>
                 <outlet property="descriptionView" destination="vss-la-Xig" id="Tp1-Vt-tmC"/>
                 <outlet property="map" destination="vOa-Va-BQG" id="L05-g3-adO"/>
-                <outlet property="mapViewButtomToVIew" destination="cOm-6D-6of" id="Ksk-KX-yZf"/>
+                <outlet property="mapBottomSpace" destination="6u8-PM-SrG" id="Zi5-je-YhC"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -22,26 +22,24 @@
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                 </mapView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vss-la-Xig" customClass="DescriptionView" customModule="WeatherMap" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="530" width="600" height="70"/>
+                    <rect key="frame" x="0.0" y="600" width="600" height="70"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="70" id="cOm-6D-6of"/>
-                    </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="vOa-Va-BQG" secondAttribute="bottom" id="6u8-PM-SrG"/>
-                <constraint firstItem="vss-la-Xig" firstAttribute="leading" secondItem="vOa-Va-BQG" secondAttribute="leading" id="Aep-A2-jhX"/>
+                <constraint firstItem="vss-la-Xig" firstAttribute="trailing" secondItem="vOa-Va-BQG" secondAttribute="trailing" id="ISd-El-Rja"/>
                 <constraint firstAttribute="trailing" secondItem="vOa-Va-BQG" secondAttribute="trailing" id="Lmn-Ic-4yn"/>
                 <constraint firstItem="vOa-Va-BQG" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="NAr-bZ-OQg"/>
                 <constraint firstItem="vss-la-Xig" firstAttribute="trailing" secondItem="vOa-Va-BQG" secondAttribute="trailing" id="O6Y-Rz-Prh"/>
                 <constraint firstItem="vss-la-Xig" firstAttribute="top" secondItem="vOa-Va-BQG" secondAttribute="bottom" constant="-70" id="R1R-gQ-e1I"/>
-                <constraint firstItem="vss-la-Xig" firstAttribute="bottom" secondItem="vOa-Va-BQG" secondAttribute="bottom" id="U9e-hC-4WN"/>
                 <constraint firstItem="vss-la-Xig" firstAttribute="bottom" secondItem="vOa-Va-BQG" secondAttribute="bottom" id="V0f-4a-B4Q"/>
+                <constraint firstItem="vss-la-Xig" firstAttribute="leading" secondItem="vOa-Va-BQG" secondAttribute="leading" id="g3B-F4-nx1"/>
+                <constraint firstAttribute="bottom" secondItem="vss-la-Xig" secondAttribute="bottom" constant="-70" id="gEh-ES-tc0"/>
                 <constraint firstItem="vss-la-Xig" firstAttribute="leading" secondItem="vOa-Va-BQG" secondAttribute="leading" id="kPW-31-ZpK"/>
                 <constraint firstItem="vOa-Va-BQG" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="mue-dK-lvB"/>
-                <constraint firstItem="vss-la-Xig" firstAttribute="trailing" secondItem="vOa-Va-BQG" secondAttribute="trailing" id="rIt-DA-edw"/>
+                <constraint firstItem="vss-la-Xig" firstAttribute="top" secondItem="vOa-Va-BQG" secondAttribute="bottom" id="omP-hk-yzn"/>
             </constraints>
             <variation key="default">
                 <mask key="constraints">
