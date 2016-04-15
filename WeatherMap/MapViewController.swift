@@ -8,21 +8,29 @@
 
 import UIKit
 import MapKit
+
+
+
 class MapViewController: UIViewController {
 
     @IBOutlet weak var map: MKMapView!
-    @IBOutlet weak var descriptionView: UIView!
+
+    @IBOutlet weak var descriptionView: DescriptionView!
     
-    @IBOutlet weak var citylabel: UILabel!
-    @IBOutlet weak var coordinateLabel: UILabel!
+    @IBOutlet weak var mapViewButtomToVIew: NSLayoutConstraint!
     
     let initialLocation = CLLocation(latitude: 21.282778, longitude: -157.829444)
+    private let hightOfDescriptionView: CGFloat = 70
+    
     var annotaton: MKPointAnnotation?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         map.delegate = self
+        descriptionView.translatesAutoresizingMaskIntoConstraints = false
+        mapViewButtomToVIew.constant = 0
         centerMapOnLocation(initialLocation)
+        
         let tapGR = UITapGestureRecognizer(target: self, action: #selector(MapViewController.annotation(_:)))
         map.addGestureRecognizer(tapGR)
     }
@@ -52,6 +60,25 @@ class MapViewController: UIViewController {
         map.setRegion(coordinateRegion, animated: true)
     }
     
+    func showDescriptionView() {
+        print("Transform")
+        
+        UIView.animateWithDuration(0.7, delay: 0.0, options: .CurveEaseOut, animations: {
+            self.mapViewButtomToVIew.constant = self.hightOfDescriptionView
+            self.view.layoutIfNeeded()
+            }, completion: nil)
+        
+    }
+    
+    func hideDescriptionView() {
+        UIView.animateWithDuration(0.7, delay: 0.0, options: .CurveEaseOut, animations: {
+            self.mapViewButtomToVIew.constant = 0
+            self.view.layoutIfNeeded()
+            }, completion: nil)
+    }
+    
+    
+    
     func getPlaceName(coordinate: CLLocationCoordinate2D) {
         CLGeocoder().reverseGeocodeLocation(CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude), completionHandler: {[unowned self](placemarks, error) -> Void in
             if let error = error {
@@ -60,12 +87,18 @@ class MapViewController: UIViewController {
                 if placemarks.count > 0 {
                     let pm = placemarks[0] as CLPlacemark
                     if let locality = pm.locality {
-                        print("City = \(locality)")
-                        self.descriptionView.hidden = false
-                        self.citylabel.text = locality
+                        
+                        self.descriptionView.cityLabel.text = locality
                         let latStr = NSString(format: "%.5f", coordinate.latitude)
                         let lonStr = NSString(format: "%.5f", coordinate.longitude)
-                        self.coordinateLabel.text = "lat = \(latStr)    lon = \(lonStr)"
+                        self.descriptionView.coordinateLabel.text = "lat = \(latStr)    lon = \(lonStr)"
+                        self.showDescriptionView()
+                        
+//                        print("City = \(locality)")
+//                        self.descriptionView.hidden = false
+//                        self.citylabel.text = locality
+                    }else{
+                        self.hideDescriptionView()
                     }
                 }
             } else {

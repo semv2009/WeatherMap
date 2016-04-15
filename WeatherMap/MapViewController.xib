@@ -7,10 +7,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MapViewController" customModule="WeatherMap" customModuleProvider="target">
             <connections>
-                <outlet property="citylabel" destination="Qdq-W9-tXU" id="jXN-La-Jed"/>
-                <outlet property="coordinateLabel" destination="dGq-H5-W3g" id="9Xh-xD-9L8"/>
-                <outlet property="descriptionView" destination="mfy-dF-9dK" id="i4T-4t-qQM"/>
+                <outlet property="descriptionView" destination="vss-la-Xig" id="Tp1-Vt-tmC"/>
                 <outlet property="map" destination="vOa-Va-BQG" id="L05-g3-adO"/>
+                <outlet property="mapViewButtomToVIew" destination="cOm-6D-6of" id="Ksk-KX-yZf"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -22,68 +21,37 @@
                 <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="vOa-Va-BQG">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                 </mapView>
-                <view hidden="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mfy-dF-9dK">
-                    <rect key="frame" x="0.0" y="30" width="600" height="70"/>
-                    <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EsG-Ad-NSR">
-                            <rect key="frame" x="540" y="0.0" width="60" height="70"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="60" id="fBm-U2-ASc"/>
-                            </constraints>
-                        </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qdq-W9-tXU">
-                            <rect key="frame" x="8" y="8" width="524" height="21"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dGq-H5-W3g">
-                            <rect key="frame" x="8" y="37" width="524" height="21"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                    </subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vss-la-Xig" customClass="DescriptionView" customModule="WeatherMap" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="530" width="600" height="70"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="EsG-Ad-NSR" firstAttribute="top" secondItem="mfy-dF-9dK" secondAttribute="top" id="3DP-hI-NoP"/>
-                        <constraint firstAttribute="bottom" secondItem="EsG-Ad-NSR" secondAttribute="bottom" id="BNW-4K-tey"/>
-                        <constraint firstAttribute="trailing" secondItem="EsG-Ad-NSR" secondAttribute="trailing" id="EaC-oC-r36"/>
-                        <constraint firstItem="Qdq-W9-tXU" firstAttribute="top" secondItem="mfy-dF-9dK" secondAttribute="top" constant="8" id="OFd-3d-cXl"/>
-                        <constraint firstItem="dGq-H5-W3g" firstAttribute="leading" secondItem="mfy-dF-9dK" secondAttribute="leading" constant="8" id="W1G-nm-it7"/>
-                        <constraint firstItem="EsG-Ad-NSR" firstAttribute="leading" secondItem="dGq-H5-W3g" secondAttribute="trailing" constant="8" id="Z3u-AJ-POt"/>
-                        <constraint firstItem="Qdq-W9-tXU" firstAttribute="leading" secondItem="mfy-dF-9dK" secondAttribute="leading" constant="8" id="cSK-OM-Zwn"/>
-                        <constraint firstItem="EsG-Ad-NSR" firstAttribute="leading" secondItem="Qdq-W9-tXU" secondAttribute="trailing" constant="8" id="h1Q-BS-fqu"/>
-                        <constraint firstItem="dGq-H5-W3g" firstAttribute="top" secondItem="Qdq-W9-tXU" secondAttribute="bottom" constant="8" id="q2A-oe-YDw"/>
-                        <constraint firstAttribute="height" constant="70" id="tlf-Ww-Kp7"/>
+                        <constraint firstAttribute="height" constant="70" id="cOm-6D-6of"/>
                     </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="mfy-dF-9dK" firstAttribute="leading" secondItem="vOa-Va-BQG" secondAttribute="leading" id="0VW-sB-QLY"/>
-                <constraint firstItem="vOa-Va-BQG" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="3E2-rl-h8k"/>
-                <constraint firstItem="vOa-Va-BQG" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="4dp-Yf-jXN"/>
-                <constraint firstItem="mfy-dF-9dK" firstAttribute="trailing" secondItem="vOa-Va-BQG" secondAttribute="trailing" id="6Su-b3-gPc"/>
-                <constraint firstAttribute="bottom" secondItem="vOa-Va-BQG" secondAttribute="bottom" id="7cb-tX-Q33"/>
-                <constraint firstItem="vOa-Va-BQG" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="7xt-ND-qRv"/>
-                <constraint firstItem="mfy-dF-9dK" firstAttribute="bottom" secondItem="vOa-Va-BQG" secondAttribute="bottom" id="Dgk-b9-NlZ"/>
-                <constraint firstItem="vOa-Va-BQG" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="HHN-Hr-Yp7"/>
-                <constraint firstItem="vOa-Va-BQG" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="VUH-9S-Yaa"/>
-                <constraint firstItem="vOa-Va-BQG" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="gw3-l8-DMd"/>
-                <constraint firstAttribute="trailing" secondItem="vOa-Va-BQG" secondAttribute="trailing" id="h02-gx-4xB"/>
-                <constraint firstItem="vOa-Va-BQG" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="h7F-yi-5yK"/>
-                <constraint firstAttribute="bottom" secondItem="vOa-Va-BQG" secondAttribute="bottom" id="hmw-tL-Zgm"/>
-                <constraint firstItem="vOa-Va-BQG" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="j71-ds-QBc"/>
-                <constraint firstAttribute="trailing" secondItem="vOa-Va-BQG" secondAttribute="trailing" id="ty0-l5-xlT"/>
-                <constraint firstItem="vOa-Va-BQG" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="tzz-pc-QgK"/>
-                <constraint firstItem="vOa-Va-BQG" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="yLb-HH-jg0"/>
+                <constraint firstAttribute="bottom" secondItem="vOa-Va-BQG" secondAttribute="bottom" id="6u8-PM-SrG"/>
+                <constraint firstItem="vss-la-Xig" firstAttribute="leading" secondItem="vOa-Va-BQG" secondAttribute="leading" id="Aep-A2-jhX"/>
+                <constraint firstAttribute="trailing" secondItem="vOa-Va-BQG" secondAttribute="trailing" id="Lmn-Ic-4yn"/>
+                <constraint firstItem="vOa-Va-BQG" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="NAr-bZ-OQg"/>
+                <constraint firstItem="vss-la-Xig" firstAttribute="trailing" secondItem="vOa-Va-BQG" secondAttribute="trailing" id="O6Y-Rz-Prh"/>
+                <constraint firstItem="vss-la-Xig" firstAttribute="top" secondItem="vOa-Va-BQG" secondAttribute="bottom" constant="-70" id="R1R-gQ-e1I"/>
+                <constraint firstItem="vss-la-Xig" firstAttribute="bottom" secondItem="vOa-Va-BQG" secondAttribute="bottom" id="U9e-hC-4WN"/>
+                <constraint firstItem="vss-la-Xig" firstAttribute="bottom" secondItem="vOa-Va-BQG" secondAttribute="bottom" id="V0f-4a-B4Q"/>
+                <constraint firstItem="vss-la-Xig" firstAttribute="leading" secondItem="vOa-Va-BQG" secondAttribute="leading" id="kPW-31-ZpK"/>
+                <constraint firstItem="vOa-Va-BQG" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="mue-dK-lvB"/>
+                <constraint firstItem="vss-la-Xig" firstAttribute="trailing" secondItem="vOa-Va-BQG" secondAttribute="trailing" id="rIt-DA-edw"/>
             </constraints>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="O6Y-Rz-Prh"/>
+                    <exclude reference="R1R-gQ-e1I"/>
+                    <exclude reference="V0f-4a-B4Q"/>
+                    <exclude reference="kPW-31-ZpK"/>
+                </mask>
+            </variation>
             <point key="canvasLocation" x="339" y="369"/>
         </view>
-        <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" mapType="standard" id="uRA-DN-Hdf">
-            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-        </mapView>
     </objects>
 </document>
