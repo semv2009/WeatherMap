@@ -18,6 +18,7 @@
 		8B8CEEEA1CC10B1000326045 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8B8CEEE91CC10B1000326045 /* Info.plist */; };
 		8B8CEEEC1CC10B2400326045 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8CEEEB1CC10B2400326045 /* AppDelegate.swift */; };
 		8B8CEEF61CC1160D00326045 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8CEEF51CC1160D00326045 /* File.swift */; };
+		8B8CEEF81CC1167700326045 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8CEEF71CC1167700326045 /* File.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 		8B8CEEE91CC10B1000326045 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8B8CEEEB1CC10B2400326045 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8B8CEEF51CC1160D00326045 /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = File.swift; path = Libraly/Helpers/API/File.swift; sourceTree = "<group>"; };
+		8B8CEEF71CC1167700326045 /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = File.swift; path = Libraly/Helpers/File.swift; sourceTree = "<group>"; };
 		9DCB6520C0EE1A194039B325 /* Pods-WeatherMap.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherMap.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WeatherMap/Pods-WeatherMap.debug.xcconfig"; sourceTree = "<group>"; };
 		9EC50F37A8A33DD25BA131A7 /* Pods_WeatherMap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeatherMap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -102,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				8B2E62EC1CC1022500519F5D /* API */,
+				8B8CEEF71CC1167700326045 /* File.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -298,6 +301,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B8CEEF61CC1160D00326045 /* File.swift in Sources */,
+				8B8CEEF81CC1167700326045 /* File.swift in Sources */,
 				8B641A7F1CBD1190007E19ED /* Artwork.swift in Sources */,
 				8B8CEEDD1CC109B300326045 /* MapViewController.swift in Sources */,
 				8B8CEEEC1CC10B2400326045 /* AppDelegate.swift in Sources */,
