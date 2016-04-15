@@ -13,7 +13,8 @@ import UIKit
     var view: UIView!
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var coordinateLabel: UILabel!
-    @IBOutlet weak var weatherButton: UIButton!
+    
+    var delegate:DescriptionButtonDelegate?
     
     var nibName: String = "DescriptionView"
     
@@ -40,5 +41,12 @@ import UIKit
         let view = nib.instantiateWithOwner(self, options: nil)[0] as! UIView
         return view
     }
+    
+    @IBAction func showWeather(sender: AnyObject) {
+        delegate?.showWeather()
+    }
+}
 
+protocol DescriptionButtonDelegate {
+    func showWeather()
 }

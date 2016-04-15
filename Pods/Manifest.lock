@@ -1,13 +1,16 @@
 PODS:
   - Alamofire (3.3.1)
+  - ObjectMapper (1.2.0)
   - SnapKit (0.15.0)
 
 DEPENDENCIES:
   - Alamofire (~> 3.3)
+  - ObjectMapper (~> 1.2)
   - SnapKit (~> 0.15.0)
 
 SPEC CHECKSUMS:
   Alamofire: 369bc67b6f5ac33ded3648d7bd21c5bfb91c2ecc
+  ObjectMapper: b1e9c7c8a9f6400b72690c80072c131504caa66f
   SnapKit: 4962eed2ee18e48cbd2b2292fffc57efe7235f87
 
 COCOAPODS: 0.39.0

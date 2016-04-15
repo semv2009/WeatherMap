@@ -6,5 +6,6 @@ use_frameworks!
 target 'WeatherMap' do
 pod 'SnapKit', '~> 0.15.0'
 pod 'Alamofire', '~> 3.3'
+pod 'ObjectMapper', '~> 1.2'
 end
 

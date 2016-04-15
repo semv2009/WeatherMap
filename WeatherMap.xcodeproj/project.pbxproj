@@ -18,6 +18,9 @@
 		8B8CEEEA1CC10B1000326045 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8B8CEEE91CC10B1000326045 /* Info.plist */; };
 		8B8CEEEC1CC10B2400326045 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8CEEEB1CC10B2400326045 /* AppDelegate.swift */; };
 		8B8CEEFC1CC1171E00326045 /* OpenWeatherMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8CEEFB1CC1171E00326045 /* OpenWeatherMap.swift */; };
+		8B8CEF001CC1190F00326045 /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8CEEFE1CC1190F00326045 /* WeatherViewController.swift */; };
+		8B8CEF011CC1190F00326045 /* WeatherViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B8CEEFF1CC1190F00326045 /* WeatherViewController.xib */; };
+		8B8CEF041CC125C200326045 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8CEF031CC125C200326045 /* Weather.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +36,9 @@
 		8B8CEEE91CC10B1000326045 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8B8CEEEB1CC10B2400326045 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8B8CEEFB1CC1171E00326045 /* OpenWeatherMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OpenWeatherMap.swift; path = Libraly/Helpers/API/OpenWeatherMap.swift; sourceTree = "<group>"; };
+		8B8CEEFE1CC1190F00326045 /* WeatherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WeatherViewController.swift; path = ViewControllers/Weather/WeatherViewController.swift; sourceTree = "<group>"; };
+		8B8CEEFF1CC1190F00326045 /* WeatherViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WeatherViewController.xib; path = ViewControllers/Weather/WeatherViewController.xib; sourceTree = "<group>"; };
+		8B8CEF031CC125C200326045 /* Weather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		9DCB6520C0EE1A194039B325 /* Pods-WeatherMap.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherMap.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WeatherMap/Pods-WeatherMap.debug.xcconfig"; sourceTree = "<group>"; };
 		9EC50F37A8A33DD25BA131A7 /* Pods_WeatherMap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeatherMap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -93,6 +99,7 @@
 		8B2E62EA1CC101F600519F5D /* Libraly */ = {
 			isa = PBXGroup;
 			children = (
+				8B8CEF021CC1258200326045 /* BasicClass */,
 				8B2E62EB1CC1021600519F5D /* Helpers */,
 			);
 			name = Libraly;
@@ -150,6 +157,7 @@
 		8B641A781CBD09E0007E19ED /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				8B8CEEFD1CC1189B00326045 /* Weather */,
 				8B641A791CBD09FE007E19ED /* Map */,
 			);
 			name = ViewControllers;
@@ -162,6 +170,23 @@
 				8B8CEEDC1CC109B300326045 /* MapViewController.xib */,
 			);
 			name = Map;
+			sourceTree = "<group>";
+		};
+		8B8CEEFD1CC1189B00326045 /* Weather */ = {
+			isa = PBXGroup;
+			children = (
+				8B8CEEFE1CC1190F00326045 /* WeatherViewController.swift */,
+				8B8CEEFF1CC1190F00326045 /* WeatherViewController.xib */,
+			);
+			name = Weather;
+			sourceTree = "<group>";
+		};
+		8B8CEF021CC1258200326045 /* BasicClass */ = {
+			isa = PBXGroup;
+			children = (
+				8B8CEF031CC125C200326045 /* Weather.swift */,
+			);
+			name = BasicClass;
 			sourceTree = "<group>";
 		};
 		A113EB7C3990C1F16E6B526E /* Pods */ = {
@@ -235,6 +260,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B641A711CBD088F007E19ED /* LaunchScreen.storyboard in Resources */,
+				8B8CEF011CC1190F00326045 /* WeatherViewController.xib in Resources */,
 				8B641A6E1CBD088F007E19ED /* Assets.xcassets in Resources */,
 				8B8CEEDE1CC109B300326045 /* MapViewController.xib in Resources */,
 				8B8CEEEA1CC10B1000326045 /* Info.plist in Resources */,
@@ -298,10 +324,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B8CEEFC1CC1171E00326045 /* OpenWeatherMap.swift in Sources */,
+				8B8CEF001CC1190F00326045 /* WeatherViewController.swift in Sources */,
 				8B641A7F1CBD1190007E19ED /* Artwork.swift in Sources */,
 				8B8CEEDD1CC109B300326045 /* MapViewController.swift in Sources */,
 				8B8CEEEC1CC10B2400326045 /* AppDelegate.swift in Sources */,
 				8B8CEEE11CC109F900326045 /* DescriptionView.swift in Sources */,
+				8B8CEF041CC125C200326045 /* Weather.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

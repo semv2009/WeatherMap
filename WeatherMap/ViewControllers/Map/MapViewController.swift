@@ -28,28 +28,12 @@ class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         map.delegate = self
-        descriptionView.weatherButton.addTarget(self, action: #selector(MapViewController.showWeather), forControlEvents: .TouchDown)
+        descriptionView.delegate = self
         descriptionView.translatesAutoresizingMaskIntoConstraints = false
         centerMapOnLocation(initialLocation)
         
         let tapGR = UITapGestureRecognizer(target: self, action: #selector(MapViewController.annotation(_:)))
         map.addGestureRecognizer(tapGR)
-    }
-    
-    func showWeather(){
-        print("ShowWeather")
-        guard let city = descriptionView.cityLabel.text else { fatalError("City did't find") }
-        Alamofire.request(.GET, OpenWeatherMap.URL, parameters: ["q": city,"appid": OpenWeatherMap.API])
-            .responseJSON { response in
-                print(response.request)  // original URL request
-                print(response.response) // URL response
-                print(response.data)     // server data
-                print(response.result)   // result of response serialization
-                
-                if let JSON = response.result.value {
-                    print("JSON: \(JSON)")
-                }
-        }
     }
     
     func annotation(gesture: UIGestureRecognizer){
@@ -115,6 +99,14 @@ class MapViewController: UIViewController {
             }
         })
         
+    }
+}
+
+extension MapViewController: DescriptionButtonDelegate {
+    func showWeather(){
+        guard let city = descriptionView.cityLabel.text else { fatalError("City did't find") }
+        let weatherVC = WeatherViewController(city: city)
+        showViewController(UINavigationController(rootViewController: weatherVC), sender: self)
     }
 }
 
