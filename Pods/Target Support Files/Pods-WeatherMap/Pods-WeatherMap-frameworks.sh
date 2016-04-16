@@ -85,11 +85,13 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-WeatherMap/Alamofire.framework"
+  install_framework "Pods-WeatherMap/EZLoadingActivity.framework"
   install_framework "Pods-WeatherMap/ObjectMapper.framework"
   install_framework "Pods-WeatherMap/SnapKit.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-WeatherMap/Alamofire.framework"
+  install_framework "Pods-WeatherMap/EZLoadingActivity.framework"
   install_framework "Pods-WeatherMap/ObjectMapper.framework"
   install_framework "Pods-WeatherMap/SnapKit.framework"
 fi

@@ -17,8 +17,7 @@ class Weather: Mappable{
     var temp_min: Double?
     var sunrise: Int?
     var sunset: Int?
-    var description: String?
-    var main: String?
+    var descriptionWeather: [DescriptionWeather]?
     var windDeg: Int?
     var windSpeed: Int?
     
@@ -26,7 +25,6 @@ class Weather: Mappable{
         
     }
     
-    // Mappable
     func mapping(map: Map) {
         clouds <- map["clouds.all"]
         humidity <- map["main.humidity"]
@@ -36,9 +34,22 @@ class Weather: Mappable{
         temp_min <- map["main.temp_min"]
         sunrise <- map["sys.sunrise"]
         sunset <- map["sys.sunset"]
-        description <- map["weather.description"]
-        main <- map["weather.main"]
+        descriptionWeather <- map["weather"]
         windDeg <- map["wind.deg"]
         windSpeed <- map["wind.speed"]
+    }
+}
+
+class DescriptionWeather: Mappable{
+    var full: String?
+    var short: String?
+    
+    required init?(_ map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        full <- map["description"]
+        short <- map["main"]
     }
 }

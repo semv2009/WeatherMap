@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 import Alamofire
-
+import EZLoadingActivity
 
 class MapViewController: UIViewController {
 
@@ -27,7 +27,6 @@ class MapViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        map.delegate = self
         descriptionView.delegate = self
         descriptionView.translatesAutoresizingMaskIntoConstraints = false
         centerMapOnLocation(initialLocation)
@@ -66,14 +65,14 @@ class MapViewController: UIViewController {
         let lonStr = NSString(format: "%.5f", coordinate.longitude)
         self.descriptionView.coordinateLabel.text = "lat = \(latStr)    lon = \(lonStr)"
         
-        UIView.animateWithDuration(0.7, delay: 0.0, options: .CurveEaseOut, animations: {
+        UIView.animateWithDuration(0.4, delay: 0.0, options: .CurveEaseOut, animations: {
             self.mapBottomSpace.constant = self.hightOfDescriptionView
             self.view.layoutIfNeeded()
             }, completion: nil)
     }
     
     func hideDescriptionView() {
-        UIView.animateWithDuration(0.7, delay: 0.0, options: .CurveEaseOut, animations: {
+        UIView.animateWithDuration(0.9, delay: 0.0, options: .CurveEaseOut, animations: {
             self.mapBottomSpace.constant = 0
             self.view.layoutIfNeeded()
             }, completion: nil)
@@ -82,20 +81,29 @@ class MapViewController: UIViewController {
     
     
     func getPlaceName(coordinate: CLLocationCoordinate2D) {
+        EZLoadingActivity.show(StatusConstants.Loading.findLocation, disableUI: true)
         CLGeocoder().reverseGeocodeLocation(CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude), completionHandler: {[unowned self](placemarks, error) -> Void in
-            if let error = error {
-                print("Reverse geocoder failed with an error" + error.localizedDescription)
+            if let _ = error {
+                EZLoadingActivity.hideWithText(StatusConstants.Failed.noInternet, success: false, animated: false)
+                self.hideDescriptionView()
             } else if let placemarks = placemarks {
                 if placemarks.count > 0 {
                     let pm = placemarks[0] as CLPlacemark
                     if let locality = pm.locality {
+                        EZLoadingActivity.hide()
                         self.showDescriptionView(city: locality, coordinate: coordinate)
                     }else{
+                        EZLoadingActivity.hideWithText(StatusConstants.Failed.cityDontFind, success: false, animated: false)
                         self.hideDescriptionView()
                     }
+                }else{
+                    EZLoadingActivity.hideWithText(StatusConstants.Failed.cityDontFind, success: false, animated: false)
+                    self.hideDescriptionView()
                 }
             } else {
+                EZLoadingActivity.hideWithText(StatusConstants.Failed.cityDontFind, success: false, animated: false)
                 print("Problems with the data received from geocoder.")
+                self.hideDescriptionView()
             }
         })
         
@@ -105,60 +113,36 @@ class MapViewController: UIViewController {
 extension MapViewController: DescriptionButtonDelegate {
     func showWeather(){
         guard let city = descriptionView.cityLabel.text else { fatalError("City did't find") }
-        let weatherVC = WeatherViewController(city: city)
-        showViewController(UINavigationController(rootViewController: weatherVC), sender: self)
+        EZLoadingActivity.show(StatusConstants.Loading.load, disableUI: true)
+        WebHelper.getWeather(city,
+            success: {[unowned self](result) in
+                if let result = result {
+                    EZLoadingActivity.hide()
+                    let weatherVC = WeatherViewController(weather: result)
+                    self.showViewController(UINavigationController(rootViewController: weatherVC), sender: self)
+                }else{
+                    EZLoadingActivity.hideWithText(StatusConstants.Failed.noWeather, success: false, animated: false)
+                }
+            },
+            failed:{(error) in
+                EZLoadingActivity.hideWithText(StatusConstants.Failed.noInternet, success: false, animated: false)
+                print("Error")
+            }
+        )
+
+        
     }
 }
 
-extension MapViewController: MKMapViewDelegate{
-
-//    // 1
-//    func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
-//        if let annotation = annotation as? Artwork {
-//            let identifier = "pin"
-//            var view: MKPinAnnotationView
-//            if let dequeuedView = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier)
-//                as? MKPinAnnotationView { // 2
-//                dequeuedView.annotation = annotation
-//                view = dequeuedView
-//            } else {
-//                // 3
-//                view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-//                view.canShowCallout = true
-//                view.calloutOffset = CGPoint(x: -5, y: 5)
-//                view.rightCalloutAccessoryView = UIButton(type: .ContactAdd) as UIView
-//            }
-//            return view
-//        }
-//        return nil
-//    }
-////
-//    func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
-//        
-//        let annotationTap = UITapGestureRecognizer(target: self, action: Selector("tapRecognized"))
-//        annotationTap.numberOfTapsRequired = 1
-//        view.addGestureRecognizer(annotationTap)
-//        
-//        let selectedAnnotations = mapView.selectedAnnotations
-//        
-//        for annotationView in selectedAnnotations{
-//            mapView.deselectAnnotation(annotationView, animated: true)
-//        }
-//    }
-//    
-//    func tapRecognized(gesture:UITapGestureRecognizer){
-//        
-//        let selectedAnnotations = map.selectedAnnotations
-//        
-//        for annotationView in selectedAnnotations{
-//            map.deselectAnnotation(annotationView, animated: true)
-//        }
-//    }
-//    
-//    func mapView(mapView: MKMapView, didDeselectAnnotationView view: MKAnnotationView) {
-//        
-//        view.hidden = true
-//    }
-    
-    
+extension EZLoadingActivity{
+    public static func hideWithText(text: String, success: Bool?, animated: Bool){
+        if let success = success{
+            if success{
+                Settings.SuccessText = text
+            }else{
+                Settings.FailText = text
+            }
+        }
+        hide(success: success, animated: animated)
+    }
 }

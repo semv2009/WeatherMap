@@ -11,36 +11,27 @@ import Alamofire
 import ObjectMapper
 
 class WeatherViewController: UIViewController {
-    var city: String!
+    var weather: Weather!
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = city
+        //self.title = city
+        print(weather.clouds)
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: #selector(WeatherViewController.dismiss))
         
-        guard let city = city else { fatalError("City did't find") }
-        Alamofire.request(.GET, OpenWeatherMap.URL, parameters: ["q": city,"appid": OpenWeatherMap.API])
-            .responseJSON { response in
-                print(response.request)  // original URL request
-                print(response.response) // URL response
-                print(response.data)     // server data
-                print(response.result)   // result of response serialization
-                if let JSON = response.result.value {
-                    print("JSON: \(JSON)")
-                    let mapper = Mapper<Weather>()
-                    let w = mapper.map(JSON)
-                    print(w?.windDeg)
-                     print(w?.main)
-                     print(w?.description)
-                     print(w?.temp_max)
-
-                }
-        }
-
+        
+//        WebHelper.getWeather(city) ,
+//            succsess:{ (result) in
+//                print("Clouds = \(result?.clouds)")
+//            },
+//        failed:{
+//            
+//        }
+        
     }
 
-    init(city: String) {
+    init(weather: Weather) {
         super.init(nibName: nil, bundle: nil)
-        self.city = city
+        self.weather = weather
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -53,7 +44,6 @@ class WeatherViewController: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
 }
