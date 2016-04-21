@@ -28,29 +28,33 @@ class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         descriptionView.delegate = self
-        descriptionView.translatesAutoresizingMaskIntoConstraints = false
         centerMapOnLocation(initialLocation)
         
         let tapGR = UITapGestureRecognizer(target: self, action: #selector(MapViewController.annotation(_:)))
         map.addGestureRecognizer(tapGR)
     }
     
+    //MARK: MapView
+    
     func annotation(gesture: UIGestureRecognizer){
-        if let annotaton = self.annotaton{
-            map.removeAnnotation(annotaton)
-        }
+        let coordinate = getCoordinate(gesture)
+        makeAnnotation(coordinate)
         
-        let touchPoint = gesture.locationInView(self.map)
-        let coordinate: CLLocationCoordinate2D = map.convertPoint(touchPoint, toCoordinateFromView: self.map)
-        
-        getPlaceName(coordinate)
-        
-        annotaton = MKPointAnnotation()
-        annotaton?.coordinate = coordinate
-        
-        guard let annotaton = annotaton else { fatalError("Don't create annotation") }
-        map.addAnnotation(annotaton)
-        print(coordinate)
+        EZLoadingActivity.show(StatusConstants.Loading.findLocation, disableUI: true)
+        WebHelper.getPlaceName(coordinate,
+            success: {[unowned self](result) in
+                EZLoadingActivity.hide()
+                self.showDescriptionView(city: result, coordinate: coordinate)
+            },
+            failed:{[unowned self] (error) in
+                if let _ = error{
+                    EZLoadingActivity.hideWithText(StatusConstants.Failed.noInternet, success: false, animated: false)
+                }else{
+                    EZLoadingActivity.hideWithText(StatusConstants.Failed.cityDontFind, success: false, animated: false)
+                }
+                self.hideDescriptionView()
+            }
+        )
     }
     
     let regionRadius: CLLocationDistance = 1000
@@ -59,11 +63,28 @@ class MapViewController: UIViewController {
         map.setRegion(coordinateRegion, animated: true)
     }
     
+    func getCoordinate(gesture: UIGestureRecognizer) -> CLLocationCoordinate2D{
+        let touchPoint = gesture.locationInView(self.map)
+        return  map.convertPoint(touchPoint, toCoordinateFromView: self.map)
+    }
+    
+    func makeAnnotation(coordinate: CLLocationCoordinate2D){
+        if let annotaton = self.annotaton{
+            map.removeAnnotation(annotaton)
+        }
+        
+        annotaton = MKPointAnnotation()
+        annotaton?.coordinate = coordinate
+        
+        guard let annotaton = annotaton else { fatalError("Don't create annotation") }
+        map.addAnnotation(annotaton)
+    }
+    
+    //MARK: DescriptionView
+    
     func showDescriptionView(city city: String, coordinate: CLLocationCoordinate2D) {
         self.descriptionView.cityLabel.text = city
-        let latStr = NSString(format: "%.5f", coordinate.latitude)
-        let lonStr = NSString(format: "%.5f", coordinate.longitude)
-        self.descriptionView.coordinateLabel.text = "lat = \(latStr)    lon = \(lonStr)"
+        self.descriptionView.coordinateLabel.text = coordinate.toString()
         
         UIView.animateWithDuration(0.4, delay: 0.0, options: .CurveEaseOut, animations: {
             self.mapBottomSpace.constant = self.hightOfDescriptionView
@@ -77,38 +98,9 @@ class MapViewController: UIViewController {
             self.view.layoutIfNeeded()
             }, completion: nil)
     }
-    
-    
-    
-    func getPlaceName(coordinate: CLLocationCoordinate2D) {
-        EZLoadingActivity.show(StatusConstants.Loading.findLocation, disableUI: true)
-        CLGeocoder().reverseGeocodeLocation(CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude), completionHandler: {[unowned self](placemarks, error) -> Void in
-            if let _ = error {
-                EZLoadingActivity.hideWithText(StatusConstants.Failed.noInternet, success: false, animated: false)
-                self.hideDescriptionView()
-            } else if let placemarks = placemarks {
-                if placemarks.count > 0 {
-                    let pm = placemarks[0] as CLPlacemark
-                    if let locality = pm.locality {
-                        EZLoadingActivity.hide()
-                        self.showDescriptionView(city: locality, coordinate: coordinate)
-                    }else{
-                        EZLoadingActivity.hideWithText(StatusConstants.Failed.cityDontFind, success: false, animated: false)
-                        self.hideDescriptionView()
-                    }
-                }else{
-                    EZLoadingActivity.hideWithText(StatusConstants.Failed.cityDontFind, success: false, animated: false)
-                    self.hideDescriptionView()
-                }
-            } else {
-                EZLoadingActivity.hideWithText(StatusConstants.Failed.cityDontFind, success: false, animated: false)
-                print("Problems with the data received from geocoder.")
-                self.hideDescriptionView()
-            }
-        })
-        
-    }
 }
+
+//MARK: Description Button Delegate
 
 extension MapViewController: DescriptionButtonDelegate {
     func showWeather(){
@@ -134,6 +126,8 @@ extension MapViewController: DescriptionButtonDelegate {
     }
 }
 
+//MARK: Extension EZLoadingActivity
+
 extension EZLoadingActivity{
     public static func hideWithText(text: String, success: Bool?, animated: Bool){
         if let success = success{
@@ -144,5 +138,15 @@ extension EZLoadingActivity{
             }
         }
         hide(success: success, animated: animated)
+    }
+}
+
+//MARK: Extension CLLocationCoordinate2D
+
+extension CLLocationCoordinate2D{
+    func toString() -> String{
+        let latStr = NSString(format: "%.5f", latitude)
+        let lonStr = NSString(format: "%.5f", longitude)
+        return "lat = \(latStr)    lon = \(lonStr)"
     }
 }

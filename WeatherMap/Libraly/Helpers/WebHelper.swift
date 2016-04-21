@@ -9,6 +9,7 @@
 import Foundation
 import Alamofire
 import ObjectMapper
+import MapKit
 
 class WebHelper{
     private static let OpenWeatherMapUrl: String = "http://api.openweathermap.org/data/2.5/weather"
@@ -32,4 +33,22 @@ class WebHelper{
                 }
         }
     }
+    
+    static func getPlaceName(coordinate: CLLocationCoordinate2D, success: (result: String) -> Void ,failed: (error: NSError?) -> Void){
+        CLGeocoder().reverseGeocodeLocation(CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude), completionHandler: {(placemarks, error) -> Void in
+            if let error = error {
+                failed(error: error)
+            } else if let placemarks = placemarks {
+                if placemarks.count > 0 {
+                    let pm = placemarks[0] as CLPlacemark
+                    if let locality = pm.locality {
+                        success(result: locality)
+                        return
+                    }
+                }
+                failed(error: nil)
+            }
+        })
+    }
+    
 }
