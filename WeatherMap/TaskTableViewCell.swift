@@ -18,12 +18,12 @@ class TaskTableViewCell: UITableViewCell {
     
     @IBOutlet weak var dateLabel: UILabel!
     
-    func updateUI(task: Task){
+    func updateUI(task: Task) {
         if task.mark {
             let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: task.name)
             attributeString.addAttribute(NSStrikethroughStyleAttributeName, value: 2, range: NSMakeRange(0, attributeString.length))
             nameLabel.attributedText = attributeString
-        }else{
+        } else {
             nameLabel.text = task.name
         }
          

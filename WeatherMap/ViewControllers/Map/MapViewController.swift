@@ -36,7 +36,7 @@ class MapViewController: UIViewController {
     
     //MARK: MapView
     
-    func annotation(gesture: UIGestureRecognizer){
+    func annotation(gesture: UIGestureRecognizer) {
         let coordinate = getCoordinate(gesture)
         makeAnnotation(coordinate)
         
@@ -46,15 +46,14 @@ class MapViewController: UIViewController {
                 EZLoadingActivity.hide()
                 self.showDescriptionView(city: result, coordinate: coordinate)
             },
-            failed:{[unowned self] (error) in
-                if let _ = error{
+            failed: {[unowned self] (error) in
+                if let _ = error {
                     EZLoadingActivity.hideWithText(StatusConstants.Failed.noInternet, success: false, animated: false)
-                }else{
+                } else {
                     EZLoadingActivity.hideWithText(StatusConstants.Failed.cityDontFind, success: false, animated: false)
                 }
                 self.hideDescriptionView()
-            }
-        )
+            })
     }
     
     let regionRadius: CLLocationDistance = 1000
@@ -63,13 +62,13 @@ class MapViewController: UIViewController {
         map.setRegion(coordinateRegion, animated: true)
     }
     
-    func getCoordinate(gesture: UIGestureRecognizer) -> CLLocationCoordinate2D{
+    func getCoordinate(gesture: UIGestureRecognizer) -> CLLocationCoordinate2D {
         let touchPoint = gesture.locationInView(self.map)
         return  map.convertPoint(touchPoint, toCoordinateFromView: self.map)
     }
     
-    func makeAnnotation(coordinate: CLLocationCoordinate2D){
-        if let annotaton = self.annotaton{
+    func makeAnnotation(coordinate: CLLocationCoordinate2D) {
+        if let annotaton = self.annotaton {
             map.removeAnnotation(annotaton)
         }
         
@@ -103,7 +102,7 @@ class MapViewController: UIViewController {
 //MARK: Description Button Delegate
 
 extension MapViewController: DescriptionButtonDelegate {
-    func showWeather(){
+    func showWeather() {
         guard let city = descriptionView.cityLabel.text else { fatalError("City did't find") }
         EZLoadingActivity.show(StatusConstants.Loading.load, disableUI: true)
         WebHelper.getWeather(city,
@@ -112,15 +111,14 @@ extension MapViewController: DescriptionButtonDelegate {
                     EZLoadingActivity.hide()
                     let weatherVC = WeatherViewController(weather: result)
                     self.showViewController(UINavigationController(rootViewController: weatherVC), sender: self)
-                }else{
+                } else {
                     EZLoadingActivity.hideWithText(StatusConstants.Failed.noWeather, success: false, animated: false)
                 }
             },
-            failed:{(error) in
+            failed: {(error) in
                 EZLoadingActivity.hideWithText(StatusConstants.Failed.noInternet, success: false, animated: false)
                 print("Error")
-            }
-        )
+            })
 
         
     }
@@ -128,12 +126,12 @@ extension MapViewController: DescriptionButtonDelegate {
 
 //MARK: Extension EZLoadingActivity
 
-extension EZLoadingActivity{
-    public static func hideWithText(text: String, success: Bool?, animated: Bool){
-        if let success = success{
-            if success{
+extension EZLoadingActivity {
+    public static func hideWithText(text: String, success: Bool?, animated: Bool) {
+        if let success = success {
+            if success {
                 Settings.SuccessText = text
-            }else{
+            } else {
                 Settings.FailText = text
             }
         }
@@ -143,8 +141,8 @@ extension EZLoadingActivity{
 
 //MARK: Extension CLLocationCoordinate2D
 
-extension CLLocationCoordinate2D{
-    func toString() -> String{
+extension CLLocationCoordinate2D {
+    func toString() -> String {
         let latStr = NSString(format: "%.5f", latitude)
         let lonStr = NSString(format: "%.5f", longitude)
         return "lat = \(latStr)    lon = \(lonStr)"

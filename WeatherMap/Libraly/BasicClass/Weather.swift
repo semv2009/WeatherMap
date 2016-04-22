@@ -8,14 +8,14 @@
 
 import Foundation
 import ObjectMapper
-class Weather: Mappable{
+class Weather: Mappable {
     var city: String?
     var clouds: Int?
     var humidity: Int?
     var pressure: Int?
     var temp: Double?
-    var temp_max: Double?
-    var temp_min: Double?
+    var temMax: Double?
+    var tempMin: Double?
     var sunrise: Double?
     var sunset: Double?
     var descriptionWeather: [DescriptionWeather]?
@@ -32,8 +32,8 @@ class Weather: Mappable{
         humidity <- map["main.humidity"]
         pressure <- map["main.pressure"]
         temp <- map["main.temp"]
-        temp_max <- map["main.temp_max"]
-        temp_min <- map["main.temp_min"]
+        temMax <- map["main.temp_max"]
+        tempMin <- map["main.temp_min"]
         sunrise <- map["sys.sunrise"]
         sunset <- map["sys.sunset"]
         descriptionWeather <- map["weather"]
@@ -41,26 +41,26 @@ class Weather: Mappable{
         windSpeed <- map["wind.speed"]
     }
     
-    func getDictinaryProperty() -> [Property]{
+    func getDictinaryProperty() -> [Property] {
         var dictinary = [Property]()
-        if let clouds = clouds{
+        if let clouds = clouds {
             dictinary.append(Property(name: "Cloud", value: "\(clouds)%"))
         }
-        if let humidity = humidity{
+        if let humidity = humidity {
             dictinary.append(Property(name: "Humidity", value: "\(humidity)%"))
         }
-        if let pressure = pressure{
+        if let pressure = pressure {
             dictinary.append(Property(name: "Pressure", value: "\(pressure)mm"))
         }
-        if let sunrise = sunrise{
+        if let sunrise = sunrise {
             let time = NSDate(timeIntervalSince1970: sunrise)
             dictinary.append(Property(name: "Sunrise", value: time.getTimeForProperty()))
         }
-        if let sunset = sunset{
+        if let sunset = sunset {
             let time = NSDate(timeIntervalSince1970: sunset)
             dictinary.append(Property(name: "Sunset", value: time.getTimeForProperty()))
         }
-        if let windSpeed = windSpeed{
+        if let windSpeed = windSpeed {
             dictinary.append(Property(name: "Wind", value: "\(windSpeed)m/c"))
         }
         return dictinary
@@ -68,7 +68,7 @@ class Weather: Mappable{
     
 }
 
-class DescriptionWeather: Mappable{
+class DescriptionWeather: Mappable {
     var full: String?
     var short: String?
     var icon: String?
@@ -83,7 +83,7 @@ class DescriptionWeather: Mappable{
     }
 }
 
-struct Property{
+struct Property {
     var name: String
     var value: String
 }

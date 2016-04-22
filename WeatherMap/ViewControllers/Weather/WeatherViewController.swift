@@ -53,11 +53,11 @@ class WeatherViewController: UIViewController {
         dismissViewControllerAnimated(true, completion: nil)
     }
     
-    func rotated(){
+    func rotated() {
         calculateWidthCell()
     }
     
-    func calculateWidthCell(){
+    func calculateWidthCell() {
         if let layout = extentionCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             let itemWidth = extentionCollectionView.bounds.width / 4.0
             let itemHeight = layout.itemSize.height
@@ -66,27 +66,27 @@ class WeatherViewController: UIViewController {
         }
     }
     
-    func updateUI(){
+    func updateUI() {
         if let city = weather.city {
             self.title = city
         }
-        if let sunrise = weather.sunrise{
+        if let sunrise = weather.sunrise {
             let time = NSDate(timeIntervalSince1970: sunrise)
             self.title = self.title! + "(\(time.getDay()))"
         }
-        if let temp = weather.temp{
+        if let temp = weather.temp {
             tempLabel.text = "\(temp)°F"
         }
-        if let minTemp = weather.temp_min{
+        if let minTemp = weather.tempMin {
             minTempLabel.text = "Min = \(minTemp)°F"
         }
-        if let maxTemp = weather.temp_max{
+        if let maxTemp = weather.temMax {
             maxTempLabel.text = "Max = \(maxTemp)°F"
         }
-        if let descriptions = weather.descriptionWeather,description = descriptions[0].full{
+        if let descriptions = weather.descriptionWeather, description = descriptions[0].full {
             descriptionLabel.text = description
         }
-        if let descriptions = weather.descriptionWeather,icon = descriptions[0].icon{
+        if let descriptions = weather.descriptionWeather, icon = descriptions[0].icon {
             let myCache = ImageCache(name: icon)
             weatherImage.kf_setImageWithURL(NSURL(string: "http://openweathermap.org/img/w/\(icon).png")!,
                                             placeholderImage: nil,
@@ -98,7 +98,7 @@ class WeatherViewController: UIViewController {
 
 //MARK: CollectionView Delegate
 
-extension WeatherViewController: UICollectionViewDelegate, UICollectionViewDataSource{
+extension WeatherViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     override func viewWillLayoutSubviews() {
         calculateWidthCell()

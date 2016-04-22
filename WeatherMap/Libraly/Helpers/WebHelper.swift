@@ -11,30 +11,30 @@ import Alamofire
 import ObjectMapper
 import MapKit
 
-class WebHelper{
+class WebHelper {
     private static let OpenWeatherMapUrl: String = "http://api.openweathermap.org/data/2.5/weather"
     private static let City = "q"
     private static let AppId = "appid"
     
-    static func getWeather(city: String, success: (result: Weather?) -> Void ,failed: (error: NSError?) -> Void){
+    static func getWeather(city: String, success: (result: Weather?) -> Void, failed: (error: NSError?) -> Void) {
         Alamofire.request(.GET, OpenWeatherMapUrl, parameters: [City: city, AppId: OpenWeatherMap.ApiKey])
             .responseJSON { response in
-                if let error = response.result.error{
+                if let error = response.result.error {
                     failed(error: error)
-                }else{
+                } else {
                     if let JSON = response.result.value {
                         let mapper = Mapper<Weather>()
                         let w = mapper.map(JSON)
                         print(JSON)
                         success(result: w)
-                    }else{
+                    } else {
                         success(result: nil)
                     }
                 }
         }
     }
     
-    static func getPlaceName(coordinate: CLLocationCoordinate2D, success: (result: String) -> Void ,failed: (error: NSError?) -> Void){
+    static func getPlaceName(coordinate: CLLocationCoordinate2D, success: (result: String) -> Void, failed: (error: NSError?) -> Void) {
         CLGeocoder().reverseGeocodeLocation(CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude), completionHandler: {(placemarks, error) -> Void in
             if let error = error {
                 failed(error: error)

@@ -14,8 +14,7 @@ import UIKit
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var coordinateLabel: UILabel!
     
-    var delegate:DescriptionButtonDelegate?
-    
+    var delegate: DescriptionButtonDelegate?
     var nibName: String = "DescriptionView"
     
     override init(frame: CGRect) {
@@ -38,8 +37,10 @@ import UIKit
     func loadViewFromNib() -> UIView {
         let bundle = NSBundle(forClass: self.dynamicType)
         let nib = UINib(nibName: nibName, bundle: bundle)
-        let view = nib.instantiateWithOwner(self, options: nil)[0] as! UIView
-        return view
+        if let view = nib.instantiateWithOwner(self, options: nil)[0] as? UIView {
+            return view
+        }
+        return UIView()
     }
     
     @IBAction func showWeather(sender: AnyObject) {
