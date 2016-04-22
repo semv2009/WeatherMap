@@ -18,14 +18,14 @@
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d0Z-ma-X8i">
                     <rect key="frame" x="8" y="8" width="514" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                    <color key="textColor" red="0.98348861710000002" green="0.95207088360000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MwS-LB-GSZ">
                     <rect key="frame" x="8" y="37" width="514" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T6R-lT-GEk">
@@ -33,13 +33,16 @@
                     <constraints>
                         <constraint firstAttribute="width" constant="58" id="ir5-Bt-7CK"/>
                     </constraints>
-                    <state key="normal" title="Weather"/>
+                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
+                    <state key="normal" title="Weather">
+                        <color key="titleColor" red="0.98348861710000002" green="0.95207088360000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
                     <connections>
                         <action selector="showWeather:" destination="-1" eventType="touchUpInside" id="XuC-vf-WZo"/>
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.0" green="0.39494154510000001" blue="0.8310904777" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="T6R-lT-GEk" firstAttribute="bottom" secondItem="MwS-LB-GSZ" secondAttribute="bottom" id="8L0-8f-xUH"/>
                 <constraint firstItem="MwS-LB-GSZ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="KaL-xA-nmU"/>

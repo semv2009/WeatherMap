@@ -44,7 +44,7 @@ class Weather: Mappable{
     func getDictinaryProperty() -> [Property]{
         var dictinary = [Property]()
         if let clouds = clouds{
-            dictinary.append(Property(name: "Clouds", value: "\(clouds)%"))
+            dictinary.append(Property(name: "Cloud", value: "\(clouds)%"))
         }
         if let humidity = humidity{
             dictinary.append(Property(name: "Humidity", value: "\(humidity)%"))
@@ -71,7 +71,7 @@ class Weather: Mappable{
 class DescriptionWeather: Mappable{
     var full: String?
     var short: String?
-    
+    var icon: String?
     required init?(_ map: Map) {
         
     }
@@ -79,6 +79,7 @@ class DescriptionWeather: Mappable{
     func mapping(map: Map) {
         full <- map["description"]
         short <- map["main"]
+        icon <- map["icon"]
     }
 }
 

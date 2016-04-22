@@ -13,7 +13,7 @@
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="150" height="50"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cloud" translatesAutoresizingMaskIntoConstraints="NO" id="X8f-DS-uZX">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sunset" translatesAutoresizingMaskIntoConstraints="NO" id="X8f-DS-uZX">
                         <rect key="frame" x="0.0" y="12" width="25" height="25"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="25" id="eJy-EX-87a"/>
@@ -22,20 +22,20 @@
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YoW-w2-Yt3">
                         <rect key="frame" x="33" y="0.0" width="117" height="24"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bUA-d1-r9S">
                         <rect key="frame" x="33" y="24" width="117" height="18"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                         <color key="textColor" red="0.98348861710000002" green="0.95207088360000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
-            <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.0" green="0.39494154510000001" blue="0.8310904777" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="X8f-DS-uZX" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="IuZ-He-jWa"/>
                 <constraint firstItem="YoW-w2-Yt3" firstAttribute="leading" secondItem="X8f-DS-uZX" secondAttribute="trailing" constant="8" id="OhY-U9-uzV"/>
@@ -57,6 +57,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="cloud" width="64" height="64"/>
+        <image name="Sunset" width="128" height="128"/>
     </resources>
 </document>

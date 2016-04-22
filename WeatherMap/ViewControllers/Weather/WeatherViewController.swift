@@ -9,12 +9,14 @@
 import UIKit
 import Alamofire
 import ObjectMapper
-
+import Kingfisher
 class WeatherViewController: UIViewController {
     @IBOutlet weak var tempLabel: UILabel!
     @IBOutlet weak var minTempLabel: UILabel!
     @IBOutlet weak var maxTempLabel: UILabel!
     @IBOutlet weak var extentionCollectionView: UICollectionView!
+    @IBOutlet weak var weatherImage: UIImageView!
+    @IBOutlet weak var descriptionLabel: UILabel!
     
     var arrayProperty = [Property]()
     var weather: Weather!
@@ -22,6 +24,7 @@ class WeatherViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(WeatherViewController.rotated), name: UIDeviceOrientationDidChangeNotification, object: nil)
+        print(weather.descriptionWeather![0].icon)
         extentionCollectionView.delegate = self
         arrayProperty = weather.getDictinaryProperty()
         extentionCollectionView.registerNib(UINib(nibName: "ExtentionCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "myCell")
@@ -80,6 +83,14 @@ class WeatherViewController: UIViewController {
         if let maxTemp = weather.temp_max{
             maxTempLabel.text = "Max = \(maxTemp)°F"
         }
+        if let descriptions = weather.descriptionWeather,description = descriptions[0].full{
+            descriptionLabel.text = description
+        }
+        if let descriptions = weather.descriptionWeather,icon = descriptions[0].icon{
+            let myCache = ImageCache(name: icon)
+            weatherImage.kf_setImageWithURL(NSURL(string: "http://openweathermap.org/img/w/\(icon).png")!,
+                                            placeholderImage: nil,
+                                            optionsInfo: [.TargetCache(myCache)])        }
     }
 
     

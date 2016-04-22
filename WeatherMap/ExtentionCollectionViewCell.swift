@@ -17,5 +17,6 @@ class ExtentionCollectionViewCell: UICollectionViewCell {
     func updateUI(property: Property){
         namePropertyLabel.text = property.name
         valuePropertyLabel.text = property.value
+        propertyImage.image = UIImage(imageLiteral: property.name)
     }
 }
