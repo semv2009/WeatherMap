@@ -14,6 +14,7 @@ struct StatusConstants {
     }
     
     struct Failed {
+        static let error = "Error"
         static let cityNotFind = "City doesn't exist"
         static let noInternet = "No Internet"
         static let noWeather = "Weahter don't find"

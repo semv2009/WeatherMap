@@ -48,7 +48,11 @@ class MapViewController: UIViewController {
             },
             failed: {[unowned self] (error) in
                 if let _ = error {
-                    EZLoadingActivity.hideWithText(StatusConstants.Failed.noInternet, success: false, animated: false)
+                    if error?.code == 2 {
+                         EZLoadingActivity.hideWithText(StatusConstants.Failed.noInternet, success: false, animated: false)
+                    } else {
+                         EZLoadingActivity.hideWithText(StatusConstants.Failed.error, success: false, animated: false)
+                    }
                 } else {
                     EZLoadingActivity.hideWithText(StatusConstants.Failed.cityNotFind, success: false, animated: false)
                 }
@@ -117,8 +121,11 @@ extension MapViewController: DescriptionButtonDelegate {
                 EZLoadingActivity.hideWithText(StatusConstants.Failed.noWeather, success: false, animated: false)
             },
             failed: {(error) in
-                EZLoadingActivity.hideWithText(StatusConstants.Failed.noInternet, success: false, animated: false)
-                print("Error")
+                if error?.code == -1009 {
+                    EZLoadingActivity.hideWithText(StatusConstants.Failed.noInternet, success: false, animated: false)
+                } else {
+                     EZLoadingActivity.hideWithText(StatusConstants.Failed.error, success: false, animated: false)
+                }
             })
 
         

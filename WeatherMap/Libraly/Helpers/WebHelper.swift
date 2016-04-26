@@ -21,6 +21,7 @@ class WebHelper {
             .responseJSON { response in
                 if let error = response.result.error {
                     failed(error: error)
+                    error.code
                 } else {
                     if let JSON = response.result.value {
                         let mapper = Mapper<Weather>()
