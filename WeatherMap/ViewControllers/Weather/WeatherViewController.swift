@@ -24,10 +24,11 @@ class WeatherViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(WeatherViewController.rotated), name: UIDeviceOrientationDidChangeNotification, object: nil)
-        print(weather.descriptionWeather![0].icon)
         extentionCollectionView.delegate = self
-        arrayProperty = weather.getDictinaryProperty()
+        arrayProperty = weather.getArrayProperty()
         extentionCollectionView.registerNib(UINib(nibName: "ExtentionCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "myCell")
+        self.navigationController?.navigationBar.translucent = false
+        self.edgesForExtendedLayout = UIRectEdge.None
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: #selector(WeatherViewController.dismiss))
         updateUI()
     }
@@ -86,11 +87,9 @@ class WeatherViewController: UIViewController {
         if let descriptions = weather.descriptionWeather, description = descriptions[0].full {
             descriptionLabel.text = description
         }
-        if let descriptions = weather.descriptionWeather, icon = descriptions[0].icon {
-            let myCache = ImageCache(name: icon)
-            weatherImage.kf_setImageWithURL(NSURL(string: "http://openweathermap.org/img/w/\(icon).png")!,
-                                            placeholderImage: nil,
-                                            optionsInfo: [.TargetCache(myCache)])        }
+        if let iconUrl = weather.iconUrl {
+            weatherImage.kf_setImageWithURL(iconUrl)
+        }
     }
 
     
@@ -119,14 +118,14 @@ extension WeatherViewController: UICollectionViewDelegate, UICollectionViewDataS
 
 // MARK: - NSDate Extension
 
-extension NSDate{
-    func getTimeForProperty() -> String{
+extension NSDate {
+    func getTimeForProperty() -> String {
         let formatter = NSDateFormatter()
         formatter.dateFormat = "HH:mm"
         return formatter.stringFromDate(NSDate(timeIntervalSinceReferenceDate: self.timeIntervalSinceReferenceDate))
     }
     
-    func getDay() -> String{
+    func getDay() -> String {
         let formatter = NSDateFormatter()
         formatter.dateFormat = "d MMMM"
         return formatter.stringFromDate(NSDate(timeIntervalSinceReferenceDate: self.timeIntervalSinceReferenceDate))

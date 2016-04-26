@@ -25,7 +25,6 @@ class WebHelper {
                     if let JSON = response.result.value {
                         let mapper = Mapper<Weather>()
                         let w = mapper.map(JSON)
-                        print(JSON)
                         success(result: w)
                     } else {
                         success(result: nil)
@@ -50,5 +49,4 @@ class WebHelper {
             }
         })
     }
-    
 }

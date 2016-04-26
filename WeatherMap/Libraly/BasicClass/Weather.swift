@@ -21,6 +21,12 @@ class Weather: Mappable {
     var descriptionWeather: [DescriptionWeather]?
     var windDeg: Int?
     var windSpeed: Int?
+    var iconUrl: NSURL? {
+        if let descriptions = descriptionWeather, icon = descriptions[0].icon {
+            return NSURL(string: "http://openweathermap.org/img/w/\(icon).png")
+        }
+        return nil
+    }
     
     required init?(_ map: Map) {
         
@@ -41,7 +47,7 @@ class Weather: Mappable {
         windSpeed <- map["wind.speed"]
     }
     
-    func getDictinaryProperty() -> [Property] {
+    func getArrayProperty() -> [Property] {
         var dictinary = [Property]()
         if let clouds = clouds {
             dictinary.append(Property(name: "Cloud", value: "\(clouds)%"))

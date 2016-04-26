@@ -13,12 +13,8 @@ struct StatusConstants {
         static let load = "Loading..."
     }
     
-    struct Success {
-        
-    }
-    
     struct Failed {
-        static let cityDontFind = "City doesn't exist"
+        static let cityNotFind = "City doesn't exist"
         static let noInternet = "No Internet"
         static let noWeather = "Weahter don't find"
     }

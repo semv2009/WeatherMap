@@ -50,7 +50,7 @@ class MapViewController: UIViewController {
                 if let _ = error {
                     EZLoadingActivity.hideWithText(StatusConstants.Failed.noInternet, success: false, animated: false)
                 } else {
-                    EZLoadingActivity.hideWithText(StatusConstants.Failed.cityDontFind, success: false, animated: false)
+                    EZLoadingActivity.hideWithText(StatusConstants.Failed.cityNotFind, success: false, animated: false)
                 }
                 self.hideDescriptionView()
             })
@@ -71,10 +71,8 @@ class MapViewController: UIViewController {
         if let annotaton = self.annotaton {
             map.removeAnnotation(annotaton)
         }
-        
         annotaton = MKPointAnnotation()
         annotaton?.coordinate = coordinate
-        
         guard let annotaton = annotaton else { fatalError("Don't create annotation") }
         map.addAnnotation(annotaton)
     }
