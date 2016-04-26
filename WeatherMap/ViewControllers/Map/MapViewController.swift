@@ -73,6 +73,7 @@ class MapViewController: UIViewController {
         }
         annotaton = MKPointAnnotation()
         annotaton?.coordinate = coordinate
+
         guard let annotaton = annotaton else { fatalError("Don't create annotation") }
         map.addAnnotation(annotaton)
     }
@@ -106,12 +107,14 @@ extension MapViewController: DescriptionButtonDelegate {
         WebHelper.getWeather(city,
             success: {[unowned self](result) in
                 if let result = result {
-                    EZLoadingActivity.hide()
-                    let weatherVC = WeatherViewController(weather: result)
-                    self.showViewController(UINavigationController(rootViewController: weatherVC), sender: self)
-                } else {
-                    EZLoadingActivity.hideWithText(StatusConstants.Failed.noWeather, success: false, animated: false)
+                    if self.descriptionView.cityLabel.text == result.city {
+                        EZLoadingActivity.hide()
+                        let weatherVC = WeatherViewController(weather: result)
+                        self.showViewController(UINavigationController(rootViewController: weatherVC), sender: self)
+                        return
+                    }
                 }
+                EZLoadingActivity.hideWithText(StatusConstants.Failed.noWeather, success: false, animated: false)
             },
             failed: {(error) in
                 EZLoadingActivity.hideWithText(StatusConstants.Failed.noInternet, success: false, animated: false)

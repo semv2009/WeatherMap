@@ -76,13 +76,13 @@ class WeatherViewController: UIViewController {
             self.title = self.title! + "(\(time.getDay()))"
         }
         if let temp = weather.temp {
-            tempLabel.text = "\(temp)°F"
+            tempLabel.text = "\(NSString(format: "%.1f", kelvinToCelsius(temp)))°C"
         }
         if let minTemp = weather.tempMin {
-            minTempLabel.text = "Min = \(minTemp)°F"
+            minTempLabel.text = "Min = \(NSString(format: "%.1f", kelvinToCelsius(minTemp)))°C"
         }
         if let maxTemp = weather.temMax {
-            maxTempLabel.text = "Max = \(maxTemp)°F"
+            maxTempLabel.text = "Max = \(NSString(format: "%.1f", kelvinToCelsius(maxTemp)))°C"
         }
         if let descriptions = weather.descriptionWeather, description = descriptions[0].full {
             descriptionLabel.text = description
@@ -95,6 +95,9 @@ class WeatherViewController: UIViewController {
     
 }
 
+func kelvinToCelsius(temp: Double) -> Double {
+    return temp - 273.15
+}
 //MARK: CollectionView Delegate
 
 extension WeatherViewController: UICollectionViewDelegate, UICollectionViewDataSource {
