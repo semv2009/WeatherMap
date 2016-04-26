@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="myCell" id="gTV-IL-0wX" customClass="ExtentionCollectionViewCell" customModule="WeatherMap" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="150" height="50"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="150" height="50"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sunset" translatesAutoresizingMaskIntoConstraints="NO" id="X8f-DS-uZX">
+                        <rect key="frame" x="0.0" y="12" width="25" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="25" id="eJy-EX-87a"/>
+                            <constraint firstAttribute="height" constant="25" id="qi1-da-TQz"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YoW-w2-Yt3">
+                        <rect key="frame" x="33" y="0.0" width="117" height="24"/>
+                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bUA-d1-r9S">
+                        <rect key="frame" x="33" y="24" width="117" height="18"/>
+                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
+                        <color key="textColor" red="0.98348861710000002" green="0.95207088360000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <color key="backgroundColor" red="0.0" green="0.39494154510000001" blue="0.8310904777" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="X8f-DS-uZX" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="IuZ-He-jWa"/>
+                <constraint firstItem="YoW-w2-Yt3" firstAttribute="leading" secondItem="X8f-DS-uZX" secondAttribute="trailing" constant="8" id="OhY-U9-uzV"/>
+                <constraint firstItem="bUA-d1-r9S" firstAttribute="leading" secondItem="X8f-DS-uZX" secondAttribute="trailing" constant="8" id="Tpa-cw-jeE"/>
+                <constraint firstAttribute="bottom" secondItem="bUA-d1-r9S" secondAttribute="bottom" constant="8" id="inv-VZ-ZbJ"/>
+                <constraint firstItem="X8f-DS-uZX" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="lAK-u5-4oX"/>
+                <constraint firstAttribute="trailing" secondItem="YoW-w2-Yt3" secondAttribute="trailing" id="r4F-qU-OXx"/>
+                <constraint firstItem="YoW-w2-Yt3" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="wFS-oB-BoI"/>
+                <constraint firstAttribute="trailing" secondItem="bUA-d1-r9S" secondAttribute="trailing" id="ycT-gj-ukD"/>
+                <constraint firstItem="bUA-d1-r9S" firstAttribute="top" secondItem="YoW-w2-Yt3" secondAttribute="bottom" id="zK7-1j-POD"/>
+            </constraints>
+            <size key="customSize" width="177" height="50"/>
+            <connections>
+                <outlet property="namePropertyLabel" destination="YoW-w2-Yt3" id="2O0-b8-QR8"/>
+                <outlet property="propertyImage" destination="X8f-DS-uZX" id="5Xn-93-Ier"/>
+                <outlet property="valuePropertyLabel" destination="bUA-d1-r9S" id="gmp-jd-T5o"/>
+            </connections>
+            <point key="canvasLocation" x="651" y="331"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="Sunset" width="128" height="128"/>
+    </resources>
+</document>
