@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MapViewController" customModule="WeatherMap" customModuleProvider="target">
             <connections>
                 <outlet property="descriptionView" destination="vss-la-Xig" id="Tp1-Vt-tmC"/>
+                <outlet property="heightDescriptionView" destination="Mw6-EZ-bX1" id="fRn-BM-tc3"/>
                 <outlet property="map" destination="vOa-Va-BQG" id="L05-g3-adO"/>
                 <outlet property="mapBottomSpace" destination="6u8-PM-SrG" id="Zi5-je-YhC"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -24,6 +25,9 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vss-la-Xig" customClass="DescriptionView" customModule="WeatherMap" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="600" width="600" height="70"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="70" id="Mw6-EZ-bX1"/>
+                    </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

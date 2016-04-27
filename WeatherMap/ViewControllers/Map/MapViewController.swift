@@ -19,26 +19,26 @@ class MapViewController: UIViewController {
     
     @IBOutlet weak var mapBottomSpace: NSLayoutConstraint!
     
-    let initialLocation = CLLocation(latitude: 21.282778, longitude: -157.829444)
+    @IBOutlet weak var heightDescriptionView: NSLayoutConstraint!
     
-    private let hightOfDescriptionView: CGFloat = 70
+    let initialLocation = CLLocation(latitude: 21.282778, longitude: -157.829444)
     
     var annotaton: MKPointAnnotation?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         descriptionView.delegate = self
-        centerMapOnLocation(initialLocation)
+        centerMapOnLocation(fromLocation: initialLocation)
         
-        let tapGR = UITapGestureRecognizer(target: self, action: #selector(MapViewController.annotation(_:)))
+        let tapGR = UITapGestureRecognizer(target: self, action: #selector(MapViewController.clickOnMap(_:)))
         map.addGestureRecognizer(tapGR)
     }
     
     //MARK: MapView
     
-    func annotation(gesture: UIGestureRecognizer) {
-        let coordinate = getCoordinate(gesture)
-        makeAnnotation(coordinate)
+    func clickOnMap(gesture: UIGestureRecognizer) {
+        let coordinate = getCoordinate(fromGesture: gesture)
+        createAnnotation(forCoordinate: coordinate)
         
         EZLoadingActivity.show(StatusConstants.Loading.findLocation, disableUI: true)
         WebHelper.getPlaceName(coordinate,
@@ -48,7 +48,7 @@ class MapViewController: UIViewController {
             },
             failed: {[unowned self] (error) in
                 if let _ = error {
-                    if error?.code == 2 {
+                    if error?.code == Error.problemWithInternet {
                          EZLoadingActivity.hideWithText(StatusConstants.Failed.noInternet, success: false, animated: false)
                     } else {
                          EZLoadingActivity.hideWithText(StatusConstants.Failed.error, success: false, animated: false)
@@ -60,18 +60,18 @@ class MapViewController: UIViewController {
             })
     }
     
-    let regionRadius: CLLocationDistance = 1000
-    func centerMapOnLocation(location: CLLocation) {
+    func centerMapOnLocation(fromLocation location: CLLocation) {
+        let regionRadius: CLLocationDistance = 1000
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, regionRadius * 2.0, regionRadius * 2.0)
         map.setRegion(coordinateRegion, animated: true)
     }
     
-    func getCoordinate(gesture: UIGestureRecognizer) -> CLLocationCoordinate2D {
+    func getCoordinate(fromGesture gesture: UIGestureRecognizer) -> CLLocationCoordinate2D {
         let touchPoint = gesture.locationInView(self.map)
         return  map.convertPoint(touchPoint, toCoordinateFromView: self.map)
     }
     
-    func makeAnnotation(coordinate: CLLocationCoordinate2D) {
+    func createAnnotation(forCoordinate coordinate: CLLocationCoordinate2D) {
         if let annotaton = self.annotaton {
             map.removeAnnotation(annotaton)
         }
@@ -89,7 +89,7 @@ class MapViewController: UIViewController {
         self.descriptionView.coordinateLabel.text = coordinate.toString()
         
         UIView.animateWithDuration(0.4, delay: 0.0, options: .CurveEaseOut, animations: {
-            self.mapBottomSpace.constant = self.hightOfDescriptionView
+            self.mapBottomSpace.constant = self.heightDescriptionView.constant
             self.view.layoutIfNeeded()
             }, completion: nil)
     }
@@ -121,38 +121,11 @@ extension MapViewController: DescriptionButtonDelegate {
                 EZLoadingActivity.hideWithText(StatusConstants.Failed.noWeather, success: false, animated: false)
             },
             failed: {(error) in
-                if error?.code == -1009 {
+                if error?.code == -Error.notInternet {
                     EZLoadingActivity.hideWithText(StatusConstants.Failed.noInternet, success: false, animated: false)
                 } else {
                      EZLoadingActivity.hideWithText(StatusConstants.Failed.error, success: false, animated: false)
                 }
             })
-
-        
-    }
-}
-
-//MARK: Extension EZLoadingActivity
-
-extension EZLoadingActivity {
-    public static func hideWithText(text: String, success: Bool?, animated: Bool) {
-        if let success = success {
-            if success {
-                Settings.SuccessText = text
-            } else {
-                Settings.FailText = text
-            }
-        }
-        hide(success: success, animated: animated)
-    }
-}
-
-//MARK: Extension CLLocationCoordinate2D
-
-extension CLLocationCoordinate2D {
-    func toString() -> String {
-        let latStr = NSString(format: "%.5f", latitude)
-        let lonStr = NSString(format: "%.5f", longitude)
-        return "lat = \(latStr)    lon = \(lonStr)"
     }
 }
