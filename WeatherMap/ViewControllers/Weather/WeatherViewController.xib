@@ -9,11 +9,11 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WeatherViewController" customModule="WeatherMap" customModuleProvider="target">
             <connections>
                 <outlet property="descriptionLabel" destination="8PB-V6-e0i" id="Mpx-OT-cDV"/>
-                <outlet property="extentionCollectionView" destination="tiU-d4-Ebg" id="akv-Vr-EKX"/>
                 <outlet property="maxTempLabel" destination="Lsj-ay-UHQ" id="Aj9-MX-ck5"/>
                 <outlet property="minTempLabel" destination="iIG-rw-Ljt" id="vfs-cR-lVO"/>
                 <outlet property="tempLabel" destination="TMa-N7-enr" id="W9y-lw-Wdf"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="weatherDetailsCollectionView" destination="tiU-d4-Ebg" id="AXv-qG-Afc"/>
                 <outlet property="weatherImage" destination="TzZ-i2-Wgl" id="EWj-k2-lRy"/>
             </connections>
         </placeholder>

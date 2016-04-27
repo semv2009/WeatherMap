@@ -30,18 +30,18 @@ class MapViewController: UIViewController {
         descriptionView.delegate = self
         centerMapOnLocation(fromLocation: initialLocation)
         
-        let tapGR = UITapGestureRecognizer(target: self, action: #selector(MapViewController.clickOnMap(_:)))
+        let tapGR = UITapGestureRecognizer(target: self, action: #selector(MapViewController.mapViewTapped(_:)))
         map.addGestureRecognizer(tapGR)
     }
     
     //MARK: MapView
     
-    func clickOnMap(gesture: UIGestureRecognizer) {
+    func mapViewTapped(gesture: UIGestureRecognizer) {
         let coordinate = getCoordinate(fromGesture: gesture)
         createAnnotation(forCoordinate: coordinate)
         
         EZLoadingActivity.show(StatusConstants.Loading.findLocation, disableUI: true)
-        WebHelper.getPlaceName(coordinate,
+        GeocoderHelper.getPlaceName(coordinate,
             success: {[unowned self](result) in
                 EZLoadingActivity.hide()
                 self.showDescriptionView(city: result, coordinate: coordinate)
@@ -92,14 +92,14 @@ class MapViewController: UIViewController {
         UIView.animateWithDuration(0.4, delay: 0.0, options: .CurveEaseOut, animations: {
             self.mapBottomSpace.constant = self.heightDescriptionView.constant
             self.view.layoutIfNeeded()
-            }, completion: nil)
+        }, completion: nil)
     }
     
     func hideDescriptionView() {
         UIView.animateWithDuration(0.9, delay: 0.0, options: .CurveEaseOut, animations: {
             self.mapBottomSpace.constant = 0
             self.view.layoutIfNeeded()
-            }, completion: nil)
+        }, completion: nil)
     }
 }
 

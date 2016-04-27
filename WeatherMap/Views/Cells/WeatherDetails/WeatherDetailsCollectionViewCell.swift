@@ -8,15 +8,15 @@
 
 import UIKit
 
-class ExtentionCollectionViewCell: UICollectionViewCell {
+class WeatherDetailsCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var propertyImage: UIImageView!
     @IBOutlet weak var namePropertyLabel: UILabel!
     @IBOutlet weak var valuePropertyLabel: UILabel!
    
-    func updateUI(property: Property) {
+    func updateUI(property: WeatherProperty) {
         namePropertyLabel.text = property.name
         valuePropertyLabel.text = property.value
-        propertyImage.image = UIImage(imageLiteral: property.name)
+        propertyImage.image = UIImage(imageLiteral: property.name.lowercaseString)
     }
 }

@@ -7,13 +7,13 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="myCell" id="gTV-IL-0wX" customClass="ExtentionCollectionViewCell" customModule="WeatherMap" customModuleProvider="target">
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="WeatherDetailsCell" id="gTV-IL-0wX" customClass="WeatherDetailsCollectionViewCell" customModule="WeatherMap" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="150" height="50"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="150" height="50"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sunset" translatesAutoresizingMaskIntoConstraints="NO" id="X8f-DS-uZX">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sunset" translatesAutoresizingMaskIntoConstraints="NO" id="X8f-DS-uZX">
                         <rect key="frame" x="0.0" y="12" width="25" height="25"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="25" id="eJy-EX-87a"/>
@@ -57,6 +57,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="Sunset" width="128" height="128"/>
+        <image name="sunset" width="64" height="64"/>
     </resources>
 </document>

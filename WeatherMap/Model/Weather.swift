@@ -8,6 +8,7 @@
 
 import Foundation
 import ObjectMapper
+
 class Weather: Mappable {
     var city: String?
     var clouds: Int?
@@ -18,11 +19,11 @@ class Weather: Mappable {
     var tempMin: Double?
     var sunrise: Double?
     var sunset: Double?
-    var descriptionWeather: [DescriptionWeather]?
+    var weatherDescription: [WeatherDescription]?
     var windDeg: Int?
     var windSpeed: Int?
     var iconUrl: NSURL? {
-        if let descriptions = descriptionWeather, icon = descriptions[0].icon {
+        if let descriptions = weatherDescription, icon = descriptions[0].icon {
             return NSURL(string: "http://openweathermap.org/img/w/\(icon).png")
         }
         return nil
@@ -42,42 +43,43 @@ class Weather: Mappable {
         tempMin <- map["main.temp_min"]
         sunrise <- map["sys.sunrise"]
         sunset <- map["sys.sunset"]
-        descriptionWeather <- map["weather"]
+        weatherDescription <- map["weather"]
         windDeg <- map["wind.deg"]
         windSpeed <- map["wind.speed"]
     }
     
-    func getArrayProperty() -> [Property] {
-        var dictinary = [Property]()
+    func getProperties() -> [WeatherProperty] {
+        var properties = [WeatherProperty]()
         if let clouds = clouds {
-            dictinary.append(Property(name: "Cloud", value: "\(clouds)%"))
+            properties.append(WeatherProperty(name: "Cloud", value: "\(clouds)%"))
         }
         if let humidity = humidity {
-            dictinary.append(Property(name: "Humidity", value: "\(humidity)%"))
+            properties.append(WeatherProperty(name: "Humidity", value: "\(humidity)%"))
         }
         if let pressure = pressure {
-            dictinary.append(Property(name: "Pressure", value: "\(pressure)mm"))
+            properties.append(WeatherProperty(name: "Pressure", value: "\(pressure)mm"))
         }
         if let sunrise = sunrise {
             let time = NSDate(timeIntervalSince1970: sunrise)
-            dictinary.append(Property(name: "Sunrise", value: time.getTimeForProperty()))
+            properties.append(WeatherProperty(name: "Sunrise", value: time.getTimeForProperty()))
         }
         if let sunset = sunset {
             let time = NSDate(timeIntervalSince1970: sunset)
-            dictinary.append(Property(name: "Sunset", value: time.getTimeForProperty()))
+            properties.append(WeatherProperty(name: "Sunset", value: time.getTimeForProperty()))
         }
         if let windSpeed = windSpeed {
-            dictinary.append(Property(name: "Wind", value: "\(windSpeed)m/c"))
+            properties.append(WeatherProperty(name: "Wind", value: "\(windSpeed)m/c"))
         }
-        return dictinary
+        return properties
     }
     
 }
 
-class DescriptionWeather: Mappable {
+class WeatherDescription: Mappable {
     var full: String?
     var short: String?
     var icon: String?
+    
     required init?(_ map: Map) {
         
     }
@@ -89,7 +91,7 @@ class DescriptionWeather: Mappable {
     }
 }
 
-struct Property {
+struct WeatherProperty {
     var name: String
     var value: String
 }

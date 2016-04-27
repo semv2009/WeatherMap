@@ -10,26 +10,22 @@ import UIKit
 import Alamofire
 import ObjectMapper
 import Kingfisher
+
 class WeatherViewController: UIViewController {
     @IBOutlet weak var tempLabel: UILabel!
     @IBOutlet weak var minTempLabel: UILabel!
     @IBOutlet weak var maxTempLabel: UILabel!
-    @IBOutlet weak var extentionCollectionView: UICollectionView!
+    @IBOutlet weak var weatherDetailsCollectionView: UICollectionView!
     @IBOutlet weak var weatherImage: UIImageView!
     @IBOutlet weak var descriptionLabel: UILabel!
     
-    var arrayProperty = [Property]()
+    var weatherProperties = [WeatherProperty]()
     var weather: Weather!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(WeatherViewController.rotated), name: UIDeviceOrientationDidChangeNotification, object: nil)
-        extentionCollectionView.delegate = self
-        arrayProperty = weather.getArrayProperty()
-        extentionCollectionView.registerNib(UINib(nibName: "ExtentionCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "myCell")
-        self.navigationController?.navigationBar.translucent = false
-        self.edgesForExtendedLayout = UIRectEdge.None
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: #selector(WeatherViewController.dismiss))
+        configureWeatherDetailsCollectionView()
+        configureNavigationBar()
         updateUI()
     }
     
@@ -54,13 +50,22 @@ class WeatherViewController: UIViewController {
         dismissViewControllerAnimated(true, completion: nil)
     }
     
-    func rotated() {
-        calculateWidthCell()
+    func configureWeatherDetailsCollectionView(){
+        weatherDetailsCollectionView.delegate = self
+        weatherProperties = weather.getProperties()
+        weatherDetailsCollectionView.registerNib(UINib(nibName: "WeatherDetailsCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "WeatherDetailsCell")
+
     }
     
-    func calculateWidthCell() {
-        if let layout = extentionCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            let itemWidth = extentionCollectionView.bounds.width / 4.0
+    func configureNavigationBar(){
+        self.navigationController?.navigationBar.translucent = false
+        self.edgesForExtendedLayout = UIRectEdge.None
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: #selector(WeatherViewController.dismiss))
+    }
+    
+    func calculateCellWidth() {
+        if let layout = weatherDetailsCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            let itemWidth = weatherDetailsCollectionView.bounds.width / 4.0
             let itemHeight = layout.itemSize.height
             layout.itemSize = CGSize(width: itemWidth, height: itemHeight)
             layout.invalidateLayout()
@@ -76,15 +81,15 @@ class WeatherViewController: UIViewController {
             self.title = self.title! + "(\(time.getDay()))"
         }
         if let temp = weather.temp {
-            tempLabel.text = "\(NSString(format: "%.1f", kelvinToCelsius(temp)))°C"
+            tempLabel.text = "\(temp)°C"
         }
         if let minTemp = weather.tempMin {
-            minTempLabel.text = "Min = \(NSString(format: "%.1f", kelvinToCelsius(minTemp)))°C"
+            minTempLabel.text = "Min = \(minTemp)°C"
         }
         if let maxTemp = weather.temMax {
-            maxTempLabel.text = "Max = \(NSString(format: "%.1f", kelvinToCelsius(maxTemp)))°C"
+            maxTempLabel.text = "Max = \(maxTemp)°C"
         }
-        if let descriptions = weather.descriptionWeather, description = descriptions[0].full {
+        if let descriptions = weather.weatherDescription, description = descriptions[0].full {
             descriptionLabel.text = description
         }
         if let iconUrl = weather.iconUrl {
@@ -95,42 +100,24 @@ class WeatherViewController: UIViewController {
     
 }
 
-func kelvinToCelsius(temp: Double) -> Double {
-    return temp - 273.15
-}
 //MARK: CollectionView Delegate
 
 extension WeatherViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     override func viewWillLayoutSubviews() {
-        calculateWidthCell()
+        super.viewWillLayoutSubviews()
+        calculateCellWidth()
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return arrayProperty.count
+        return weatherProperties.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        guard let cell = extentionCollectionView.dequeueReusableCellWithReuseIdentifier("myCell", forIndexPath: indexPath) as? ExtentionCollectionViewCell else { fatalError("Can't find cell") }
-        let property = arrayProperty[indexPath.row]
+        guard let cell = weatherDetailsCollectionView.dequeueReusableCellWithReuseIdentifier("WeatherDetailsCell", forIndexPath: indexPath) as? WeatherDetailsCollectionViewCell else { fatalError("Can't find cell") }
+        let property = weatherProperties[indexPath.row]
         cell.updateUI(property)
         return cell
         
-    }
-}
-
-// MARK: - NSDate Extension
-
-extension NSDate {
-    func getTimeForProperty() -> String {
-        let formatter = NSDateFormatter()
-        formatter.dateFormat = "HH:mm"
-        return formatter.stringFromDate(NSDate(timeIntervalSinceReferenceDate: self.timeIntervalSinceReferenceDate))
-    }
-    
-    func getDay() -> String {
-        let formatter = NSDateFormatter()
-        formatter.dateFormat = "d MMMM"
-        return formatter.stringFromDate(NSDate(timeIntervalSinceReferenceDate: self.timeIntervalSinceReferenceDate))
     }
 }
