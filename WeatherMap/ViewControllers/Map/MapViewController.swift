@@ -56,6 +56,7 @@ class MapViewController: UIViewController {
                 } else {
                     EZLoadingActivity.hideWithText(StatusConstants.Failed.cityNotFind, success: false, animated: false)
                 }
+                
                 self.hideDescriptionView()
             })
     }
