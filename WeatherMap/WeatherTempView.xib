@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WeatherTempView" customModule="WeatherMap" customModuleProvider="target">
+            <connections>
+                <outlet property="descriptionImage" destination="bpF-HV-F9e" id="xGk-dY-6FR"/>
+                <outlet property="descriptionLabel" destination="4RB-Pc-4MI" id="5JO-B2-hLN"/>
+                <outlet property="maxTempLabel" destination="D6m-FI-xbg" id="JMy-Uf-d7a"/>
+                <outlet property="minTempLabel" destination="gAR-sj-LeY" id="M9b-gl-DDh"/>
+                <outlet property="tempLabel" destination="JMO-E6-NTT" id="N9Z-jn-4iN"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="133"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="dsfsd" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JMO-E6-NTT">
+                    <rect key="frame" x="254" y="8" width="92" height="48"/>
+                    <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="40"/>
+                    <color key="textColor" red="0.98348861710000002" green="0.95207088360000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cloud" translatesAutoresizingMaskIntoConstraints="NO" id="bpF-HV-F9e">
+                    <rect key="frame" x="211" y="14" width="35" height="35"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="35" id="BMV-Tv-8E0"/>
+                        <constraint firstAttribute="width" constant="35" id="CK0-Kl-0Ps"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="35" id="L1x-Z3-C8T"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="hello" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4RB-Pc-4MI">
+                    <rect key="frame" x="279" y="64" width="42" height="24"/>
+                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
+                    <color key="textColor" red="0.98348861710000002" green="0.95207088360000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gAR-sj-LeY">
+                    <rect key="frame" x="8" y="95" width="292" height="21"/>
+                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D6m-FI-xbg">
+                    <rect key="frame" x="300" y="95" width="292" height="21"/>
+                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                    <color key="textColor" red="0.98348861710000002" green="0.95207088360000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="0.0" green="0.35892379366758498" blue="0.75529695680628273" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="D6m-FI-xbg" firstAttribute="width" secondItem="gAR-sj-LeY" secondAttribute="width" id="24h-EQ-cij"/>
+                <constraint firstItem="4RB-Pc-4MI" firstAttribute="top" secondItem="JMO-E6-NTT" secondAttribute="bottom" constant="8" symbolic="YES" id="2Dm-Ig-1DM"/>
+                <constraint firstItem="JMO-E6-NTT" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="9zD-ih-ES9"/>
+                <constraint firstItem="JMO-E6-NTT" firstAttribute="leading" secondItem="bpF-HV-F9e" secondAttribute="trailing" constant="8" symbolic="YES" id="H0p-8F-eHJ"/>
+                <constraint firstItem="JMO-E6-NTT" firstAttribute="centerX" secondItem="4RB-Pc-4MI" secondAttribute="centerX" id="Haq-WU-4vF"/>
+                <constraint firstItem="D6m-FI-xbg" firstAttribute="leading" secondItem="gAR-sj-LeY" secondAttribute="trailing" id="JFR-c6-6fZ"/>
+                <constraint firstItem="JMO-E6-NTT" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="topMargin" id="LYW-yj-CNR"/>
+                <constraint firstAttribute="trailing" secondItem="D6m-FI-xbg" secondAttribute="trailing" constant="8" id="MJ5-Rn-fbh"/>
+                <constraint firstAttribute="bottom" secondItem="4RB-Pc-4MI" secondAttribute="bottom" constant="45" id="SsA-kq-PQf"/>
+                <constraint firstItem="bpF-HV-F9e" firstAttribute="centerY" secondItem="JMO-E6-NTT" secondAttribute="centerY" id="Xde-YE-HVh"/>
+                <constraint firstItem="gAR-sj-LeY" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="aOe-ow-MXC"/>
+                <constraint firstItem="D6m-FI-xbg" firstAttribute="top" secondItem="4RB-Pc-4MI" secondAttribute="bottom" constant="7" id="pbk-D2-JNp"/>
+                <constraint firstItem="gAR-sj-LeY" firstAttribute="top" secondItem="4RB-Pc-4MI" secondAttribute="bottom" constant="7" id="uOj-Su-Rf5"/>
+                <constraint firstItem="bpF-HV-F9e" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="14" id="zkj-fc-rU3"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="395" y="347.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="cloud" width="64" height="64"/>
+    </resources>
+</document>

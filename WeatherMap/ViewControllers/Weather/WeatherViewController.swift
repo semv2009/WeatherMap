@@ -12,13 +12,9 @@ import ObjectMapper
 import Kingfisher
 
 class WeatherViewController: UIViewController {
-    @IBOutlet weak var tempLabel: UILabel!
-    @IBOutlet weak var minTempLabel: UILabel!
-    @IBOutlet weak var maxTempLabel: UILabel!
-    @IBOutlet weak var weatherDetailsCollectionView: UICollectionView!
-    @IBOutlet weak var weatherImage: UIImageView!
-    @IBOutlet weak var descriptionLabel: UILabel!
     
+    @IBOutlet weak var topWeatherView: WeatherTempView!
+    @IBOutlet weak var weatherDetailsCollectionView: UICollectionView!
     var weatherProperties = [WeatherProperty]()
     var weather: Weather!
     
@@ -50,14 +46,14 @@ class WeatherViewController: UIViewController {
         dismissViewControllerAnimated(true, completion: nil)
     }
     
-    func configureWeatherDetailsCollectionView(){
+    func configureWeatherDetailsCollectionView() {
         weatherDetailsCollectionView.delegate = self
         weatherProperties = weather.getProperties()
         weatherDetailsCollectionView.registerNib(UINib(nibName: "WeatherDetailsCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "WeatherDetailsCell")
 
     }
     
-    func configureNavigationBar(){
+    func configureNavigationBar() {
         self.navigationController?.navigationBar.translucent = false
         self.edgesForExtendedLayout = UIRectEdge.None
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: #selector(WeatherViewController.dismiss))
@@ -78,26 +74,11 @@ class WeatherViewController: UIViewController {
         }
         if let sunrise = weather.sunrise {
             let time = NSDate(timeIntervalSince1970: sunrise)
-            self.title = self.title! + "(\(time.getDay()))"
+            self.title = self.title! + "(\(time.getDayFormat()))"
         }
-        if let temp = weather.temp {
-            tempLabel.text = "\(temp)°C"
-        }
-        if let minTemp = weather.tempMin {
-            minTempLabel.text = "Min = \(minTemp)°C"
-        }
-        if let maxTemp = weather.temMax {
-            maxTempLabel.text = "Max = \(maxTemp)°C"
-        }
-        if let descriptions = weather.weatherDescription, description = descriptions[0].full {
-            descriptionLabel.text = description
-        }
-        if let iconUrl = weather.iconUrl {
-            weatherImage.kf_setImageWithURL(iconUrl)
-        }
+        
+        topWeatherView.updateUI(weather)
     }
-
-    
 }
 
 //MARK: CollectionView Delegate

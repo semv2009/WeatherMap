@@ -9,13 +9,13 @@
 import Foundation
 
 extension NSDate {
-    func getTimeForProperty() -> String {
+    func getTimeFormat() -> String {
         let formatter = NSDateFormatter()
         formatter.dateFormat = "HH:mm"
         return formatter.stringFromDate(NSDate(timeIntervalSinceReferenceDate: self.timeIntervalSinceReferenceDate))
     }
     
-    func getDay() -> String {
+    func getDayFormat() -> String {
         let formatter = NSDateFormatter()
         formatter.dateFormat = "d MMMM"
         return formatter.stringFromDate(NSDate(timeIntervalSinceReferenceDate: self.timeIntervalSinceReferenceDate))

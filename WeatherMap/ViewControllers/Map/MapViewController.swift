@@ -39,22 +39,21 @@ class MapViewController: UIViewController {
     func mapViewTapped(gesture: UIGestureRecognizer) {
         let coordinate = getCoordinate(fromGesture: gesture)
         createAnnotation(forCoordinate: coordinate)
-        
-        EZLoadingActivity.show(StatusConstants.Loading.findLocation, disableUI: true)
+        showLoadingView(StatusConstants.Loading.findLocation, disableUI: true)
         GeocoderHelper.getPlaceName(coordinate,
             success: {[unowned self](result) in
-                EZLoadingActivity.hide()
+                self.hideLoadingView()
                 self.showDescriptionView(city: result, coordinate: coordinate)
             },
             failed: {[unowned self] (error) in
                 if let _ = error {
                     if error?.code == Error.problemWithInternet {
-                         EZLoadingActivity.hideWithText(StatusConstants.Failed.noInternet, success: false, animated: false)
+                        self.hideLoadingView(StatusConstants.Failed.noInternet, success: false, animated: false)
                     } else {
-                         EZLoadingActivity.hideWithText(StatusConstants.Failed.error, success: false, animated: false)
+                        self.hideLoadingView(StatusConstants.Failed.error, success: false, animated: false)
                     }
                 } else {
-                    EZLoadingActivity.hideWithText(StatusConstants.Failed.cityNotFind, success: false, animated: false)
+                    self.hideLoadingView(StatusConstants.Failed.cityNotFind, success: false, animated: false)
                 }
                 
                 self.hideDescriptionView()
@@ -108,24 +107,24 @@ class MapViewController: UIViewController {
 extension MapViewController: DescriptionButtonDelegate {
     func showWeather() {
         guard let city = descriptionView.cityLabel.text else { fatalError("City did't find") }
-        EZLoadingActivity.show(StatusConstants.Loading.load, disableUI: true)
+        showLoadingView(StatusConstants.Loading.load, disableUI: true)
         WebHelper.getWeather(city,
             success: {[unowned self](result) in
                 if let result = result {
                     if self.descriptionView.cityLabel.text == result.city {
-                        EZLoadingActivity.hide()
+                        self.hideLoadingView()
                         let weatherVC = WeatherViewController(weather: result)
                         self.showViewController(UINavigationController(rootViewController: weatherVC), sender: self)
                         return
                     }
                 }
-                EZLoadingActivity.hideWithText(StatusConstants.Failed.noWeather, success: false, animated: false)
+                self.hideLoadingView(StatusConstants.Failed.noWeather, success: false, animated: false)
             },
             failed: {(error) in
                 if error?.code == -Error.notInternet {
-                    EZLoadingActivity.hideWithText(StatusConstants.Failed.noInternet, success: false, animated: false)
+                    self.hideLoadingView(StatusConstants.Failed.noInternet, success: false, animated: false)
                 } else {
-                     EZLoadingActivity.hideWithText(StatusConstants.Failed.error, success: false, animated: false)
+                    self.hideLoadingView(StatusConstants.Failed.error, success: false, animated: false)
                 }
             })
     }

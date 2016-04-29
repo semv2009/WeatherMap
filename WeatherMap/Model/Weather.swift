@@ -61,11 +61,11 @@ class Weather: Mappable {
         }
         if let sunrise = sunrise {
             let time = NSDate(timeIntervalSince1970: sunrise)
-            properties.append(WeatherProperty(name: "Sunrise", value: time.getTimeForProperty()))
+            properties.append(WeatherProperty(name: "Sunrise", value: time.getTimeFormat()))
         }
         if let sunset = sunset {
             let time = NSDate(timeIntervalSince1970: sunset)
-            properties.append(WeatherProperty(name: "Sunset", value: time.getTimeForProperty()))
+            properties.append(WeatherProperty(name: "Sunset", value: time.getTimeFormat()))
         }
         if let windSpeed = windSpeed {
             properties.append(WeatherProperty(name: "Wind", value: "\(windSpeed)m/c"))
