@@ -121,7 +121,7 @@ extension MapViewController: DescriptionButtonDelegate {
                 self.hideLoadingView(StatusConstants.Failed.noWeather, success: false, animated: false)
             },
             failed: {(error) in
-                if error?.code == -Error.notInternet {
+                if error?.code == Error.notInternet {
                     self.hideLoadingView(StatusConstants.Failed.noInternet, success: false, animated: false)
                 } else {
                     self.hideLoadingView(StatusConstants.Failed.error, success: false, animated: false)
