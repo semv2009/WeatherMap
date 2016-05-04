@@ -16,7 +16,7 @@ class WeatherViewController: UIViewController {
     @IBOutlet weak var topWeatherView: WeatherTempView!
     @IBOutlet weak var weatherDetailsCollectionView: UICollectionView!
     var weatherProperties = [WeatherProperty]()
-    var weather: Weather!
+    var weather: Weather
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,8 +28,8 @@ class WeatherViewController: UIViewController {
     //MARK: Init
     
     init(weather: Weather) {
-        super.init(nibName: nil, bundle: nil)
         self.weather = weather
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
